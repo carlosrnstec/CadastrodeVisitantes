@@ -479,14 +479,38 @@
      */
     const TODAY = "2026-09-06";
     const CHURCH_NAME = "AD Belém Vitápolis";
+    const STORAGE_KEY = "ad_belem_vitapolis_visitors_v1";
 
-    let visitors = [
+    const defaultVisitors = [
       { id: "v1", name: "Mariana Souza", whatsapp: "11987654321", birthday: "08/09", visit_date: "2026-08-30", weekday: "domingo", service: "Culto de domingo", source: "Amigo", prayer_request: "Oração pela família.", status: "Voltou", notes: "Recebeu contato caloroso.", visits_count: 2 },
       { id: "v2", name: "Lucas Almeida", whatsapp: "11988776655", birthday: "10/09", visit_date: "2026-09-06", weekday: "domingo", service: "Culto de domingo", source: "Instagram", prayer_request: "", status: "Novo", notes: "", visits_count: 1 },
       { id: "v3", name: "Carla Mendes", whatsapp: "11995554433", birthday: "07/09", visit_date: "2026-08-23", weekday: "domingo", service: "Quarta-feira", source: "Amigo", prayer_request: "Saúde da mãe.", status: "Em contato", notes: "Prefere mensagem no período da tarde.", visits_count: 3 },
       { id: "v4", name: "João Pedro Lima", whatsapp: "11994443322", birthday: "", visit_date: "2026-09-03", weekday: "quarta-feira", service: "Quarta-feira", source: "Google", prayer_request: "", status: "Novo", notes: "", visits_count: 1 },
       { id: "v5", name: "Aline Ferreira", whatsapp: "11993332211", birthday: "12/09", visit_date: "2026-08-23", weekday: "domingo", service: "Quarta-feira", source: "Passando na frente", prayer_request: "Emprego.", status: "Em contato", notes: "", visits_count: 2 }
     ];
+
+    let visitors = loadVisitors();
+
+    function loadVisitors() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (e) {
+        console.error("Erro ao carregar do localStorage", e);
+      }
+      return [...defaultVisitors];
+    }
+
+    function saveVisitors() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(visitors));
+      } catch (e) {
+        console.error("Erro ao salvar no localStorage", e);
+      }
+    }
 
     const automations = [
       { title: "Reengajamento em 7 dias", description: "Cria alertas para visitantes sem retorno.", tag: "Dashboard", enabled: true },
@@ -854,7 +878,7 @@
     function openWhatsApp(visitor) {
       if (!visitor) return;
       const cleanPhone = visitor.whatsapp.replace(/\D/g, "");
-      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes​😁​ com sua visita, volte sempre, Deus continue te abençoando🙌​. Atenciosamente, Pastor Vivaldino!`)}`, "_blank", "noopener,noreferrer");
+      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes com sua visita.`)}`, "_blank", "noopener,noreferrer");
       showToast("Abrindo conversa do WhatsApp em uma nova aba.");
     }
 
@@ -1021,12 +1045,13 @@
           const existing = getVisitorById(selectedId);
           record.visits_count = existing.visits_count;
           Object.assign(existing, record);
-          showToast("Cadastro atualizado com sucesso.");
+          showToast("Cadastro atualizado e salvo com sucesso.");
         } else {
           visitors.unshift(record);
-          showToast("Visitante cadastrado e exibido no painel.");
+          showToast("Visitante cadastrado e salvo no painel.");
         }
 
+        saveVisitors();
         saveBtn.disabled = false;
         closeVisitorForm();
         renderAll();
@@ -1051,6 +1076,7 @@
       document.getElementById("confirmDelete").onclick = () => {
         if (!deletingId) return;
         visitors = visitors.filter(v => v.id !== deletingId);
+        saveVisitors();
         if (selectedId === deletingId) {
           selectedId = null;
           document.getElementById("detailPanel").classList.add("hidden");
@@ -1058,7 +1084,7 @@
         deletingId = null;
         document.getElementById("deleteModal").classList.add("hidden");
         renderAll();
-        showToast("Visitante excluído com sucesso.");
+        showToast("Visitante excluído e alterações salvas.");
       };
 
       // Global event delegation for table / card buttons
@@ -1169,10 +1195,11 @@
           visits_count: 1
         });
 
+        saveVisitors();
         nextBtn.disabled = false;
         renderAll();
         showTabletStep("tabletThanks");
-        showToast("Cadastro do Tablet salvo na mesma lista do painel.");
+        showToast("Cadastro do Tablet salvo com sucesso.");
       };
 
       document.getElementById("recurringButton").onclick = () => {
@@ -1185,8 +1212,9 @@
         firstVisitor.visit_date = TODAY;
         firstVisitor.weekday = getWeekday(TODAY);
         firstVisitor.status = firstVisitor.status === "Novo" ? "Voltou" : firstVisitor.status;
+        saveVisitors();
         renderAll();
-        showToast(`Retorno de ${firstVisitor.name} registrado no painel.`);
+        showToast(`Retorno de ${firstVisitor.name} registrado e salvo.`);
       };
 
       // Initial icon compilation
