@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root { 
-      --bg: #f7f8fb; 
+      --bg: #eff2f7; 
       --surface: #fff; 
       --surface2: #f1f4f8; 
       --ink: #172033; 
@@ -74,28 +74,28 @@
 <body data-template-id="__page-root">
   <div id="loginView" class="app-shell w-full flex items-center justify-center p-5">
     <main class="surface w-full max-w-md rounded-3xl border p-7 sm:p-9 shadow-sm fade-in" aria-labelledby="login-title">
-      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-7" style="background:#e8ebff;color:#5364e8">
-        <i data-lucide="heart-handshake"></i>
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-7 overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+        <img src="https://i.ibb.co/6R2K47G/image-082d65.jpg" alt="Logo AD Belém" class="w-full h-full object-contain p-0.5" crossorigin="anonymous" onerror="this.src='https://placehold.co/48x48/5364e8/ffffff?text=AD'">
       </div>
       <h1 id="login-title" class="font-bold tracking-tight text-3xl">Acompanhe cada visita com cuidado.</h1>
-      <p class="muted mt-3 leading-relaxed text-base">Entre na demonstração do painel pastoral da AD Belém Vitápolis.</p>
+      <p class="muted mt-3 leading-relaxed text-base">Entre no painel pastoral da AD Belém Vitápolis.</p>
       <form id="loginForm" class="mt-7" novalidate>
         <div>
           <label for="loginEmail" class="block text-sm font-semibold mb-2">E-mail</label>
-          <input id="loginEmail" type="email" autocomplete="username" required class="focus-ring surface border rounded-xl w-full px-4 py-3" placeholder="pastor@visitaadbelemvitapolis.com">
+          <input id="loginEmail" type="email" autocomplete="username" required class="focus-ring surface border rounded-xl w-full px-4 py-3" value="pastor@visitaadbelemvitapolis.com" placeholder="pastor@visitaadbelemvitapolis.com">
           <p id="loginEmailError" class="hidden mt-2 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
         </div>
         <div class="mt-4">
-          <label for="loginPassword" class="block text-sm font-semibold mb-2">Senha</label>
-          <input id="loginPassword" type="password" autocomplete="current-password" required class="focus-ring surface border rounded-xl w-full px-4 py-3" placeholder="123456">
+          <label for="loginPassword" class="block text-sm font-semibold mb-2">Senha de Acesso ao Painel</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required class="focus-ring surface border rounded-xl w-full px-4 py-3" placeholder="Digite sua senha...">
           <p id="loginPasswordError" class="hidden mt-2 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
         </div>
         <p id="loginError" class="hidden mt-4 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
-        <button id="demoLogin" type="submit" class="focus-ring w-full rounded-xl py-3.5 mt-6 font-semibold text-white hover:opacity-90 min-h-12 bg-indigo-600 transition">Entrar como líder</button>
+        <button id="demoLogin" type="submit" class="focus-ring w-full rounded-xl py-3.5 mt-6 font-semibold text-white hover:opacity-90 min-h-12 bg-indigo-600 transition">Entrar e Desbloquear Painel</button>
       </form>
       <div class="mt-6 rounded-xl p-4 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-        <p class="text-sm font-semibold">Ambiente demonstrativo</p>
-        <p class="muted text-sm mt-1">E-mail: pastor@visitaadbelemvitapolis.com · Senha: 123456</p>
+        <p class="text-sm font-semibold">Credenciais de Acesso</p>
+        <p class="muted text-sm mt-1">E-mail: pastor@visitaadbelemvitapolis.com · Senha: <strong>123456</strong></p>
       </div>
     </main>
   </div>
@@ -104,12 +104,12 @@
     <header class="surface border-b sticky top-0 z-20">
       <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3 min-w-0">
-          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#e8ebff;color:#5364e8">
-            <i data-lucide="church" width="18"></i>
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+            <img src="https://i.ibb.co/6R2K47G/image-082d65.jpg" alt="Logo AD Belém" class="w-full h-full object-contain p-0.5" crossorigin="anonymous" onerror="this.src='https://placehold.co/36x36/5364e8/ffffff?text=AD'">
           </div>
           <div class="min-w-0">
             <p class="font-bold truncate text-base">AD Belém Vitápolis</p>
-            <p id="leaderGreeting" class="muted text-xs">Olá, Líder · Domingo, 06 de setembro</p>
+            <p id="leaderGreeting" class="muted text-xs">Olá, Líder · Banco de dados local ativo</p>
           </div>
         </div>
         <div class="flex gap-2">
@@ -275,9 +275,16 @@
         <section id="settings" class="view hidden fade-in" aria-labelledby="settings-heading">
           <p class="text-sm font-semibold" style="color:var(--brand)">PREFERÊNCIAS</p>
           <h1 id="settings-heading" class="font-bold tracking-tight mt-1 text-3xl">Configurações</h1>
-          <div class="surface rounded-2xl border p-6 mt-6 max-w-xl">
-            <h2 class="font-bold text-xl">Integrações preparadas</h2>
-            <p class="muted mt-2 leading-relaxed text-sm">Esta demonstração usa uma fonte local compartilhada. Os pontos de extensão para Supabase, n8n e Evolution API permanecem apenas como placeholders.</p>
+          <div class="surface rounded-2xl border p-6 mt-6 max-w-xl space-y-5">
+            <div>
+              <h2 class="font-bold text-xl">Banco de Dados Local Ativo</h2>
+              <p class="muted mt-2 leading-relaxed text-sm">Todas as modificações (cadastros, remoções, status e notas) são gravadas de forma persistente no armazenamento local do navegador (`localStorage`).</p>
+            </div>
+            <div class="pt-4 border-t" style="border-color:var(--line)">
+              <button id="resetDatabase" type="button" class="focus-ring rounded-xl px-4 py-3 font-semibold text-sm bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 transition">
+                Restaurar dados padrões de fábrica
+              </button>
+            </div>
           </div>
         </section>
       </main>
@@ -290,13 +297,37 @@
         <button id="closeDetail" type="button" class="focus-ring pill border rounded-xl h-10 w-10 flex items-center justify-center" aria-label="Voltar ao painel">
           <i data-lucide="arrow-left"></i>
         </button>
-        <button id="detailWhatsApp" type="button" class="focus-ring rounded-xl px-4 py-2.5 text-white font-semibold text-sm bg-emerald-600 hover:opacity-90 transition">
-          Chamar no WhatsApp
-        </button>
+        <div class="flex gap-2">
+          <button id="detailEdit" type="button" class="focus-ring pill border rounded-xl px-4 py-2.5 font-semibold text-sm">
+            Editar Visitante
+          </button>
+          <button id="detailWhatsApp" type="button" class="focus-ring rounded-xl px-4 py-2.5 text-white font-semibold text-sm bg-emerald-600 hover:opacity-90 transition">
+            Chamar no WhatsApp
+          </button>
+        </div>
       </div>
       <div id="detailContent" class="mt-6"></div>
     </div>
   </aside>
+
+  <div id="detailPinModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="pin-title">
+    <div class="surface w-full max-w-sm rounded-3xl border p-6 sm:p-7 shadow-2xl">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 mb-4">
+        <i data-lucide="lock-keyhole"></i>
+      </div>
+      <h2 id="pin-title" class="font-bold text-xl">Acesso Pastoral Restrito</h2>
+      <p class="muted text-sm mt-2 leading-relaxed">Digite sua senha secreta para visualizar, editar ou excluir os cadastros confidenciais dos visitantes.</p>
+      <form id="pinForm" class="mt-5" novalidate>
+        <label for="visitorSecretPin" class="block text-sm font-semibold mb-2">Senha Secreta</label>
+        <input id="visitorSecretPin" type="password" required autocomplete="current-password" class="focus-ring surface border rounded-xl w-full px-4 py-3 text-sm" placeholder="Digite a senha restrita...">
+        <p id="pinError" class="hidden mt-2 text-xs font-semibold" style="color:var(--danger)" role="alert"></p>
+        <div class="flex gap-3 mt-6">
+          <button id="cancelPin" type="button" class="focus-ring pill border rounded-xl px-4 py-3 font-semibold text-sm w-1/2">Cancelar</button>
+          <button type="submit" class="focus-ring rounded-xl px-4 py-3 text-white font-semibold text-sm bg-indigo-600 hover:opacity-90 transition w-1/2">Desbloquear</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div id="visitorModal" class="hidden fixed inset-0 z-50 bg-black/40 p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="form-title">
     <div class="surface w-full max-w-2xl mx-auto my-4 sm:my-10 rounded-3xl border p-5 sm:p-7 shadow-2xl">
@@ -380,7 +411,7 @@
         <i data-lucide="trash-2"></i>
       </div>
       <h2 id="delete-title" class="font-bold mt-5 text-2xl">Excluir visitante?</h2>
-      <p class="muted mt-2 text-sm leading-relaxed">Esta ação remove o cadastro da lista local e atualiza o painel imediatamente.</p>
+      <p class="muted mt-2 text-sm leading-relaxed">Esta ação remove o cadastro do banco de dados local e atualiza o painel imediatamente.</p>
       <div class="flex justify-end gap-3 mt-6">
         <button id="cancelDelete" type="button" class="focus-ring pill border rounded-xl px-4 py-3 font-semibold text-sm">Cancelar</button>
         <button id="confirmDelete" type="button" class="focus-ring rounded-xl px-4 py-3 text-white font-semibold text-sm bg-rose-600 hover:opacity-90 transition">Excluir visitante</button>
@@ -391,8 +422,11 @@
   <div id="tabletView" class="tablet-bg hidden fixed inset-0 z-[60] overflow-y-auto p-4 sm:p-8">
     <div class="w-full max-w-2xl mx-auto">
       <div class="flex justify-between items-center mb-8">
-        <div class="flex items-center gap-2 font-bold">
-          <i data-lucide="church" style="color:var(--brand)"></i><span>AD Belém Vitápolis</span>
+        <div class="flex items-center gap-2.5 font-bold">
+          <div class="w-8 h-8 rounded-lg overflow-hidden bg-white border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+            <img src="https://i.ibb.co/6R2K47G/image-082d65.jpg" alt="Logo AD Belém" class="w-full h-full object-contain p-0.5" crossorigin="anonymous" onerror="this.src='https://placehold.co/32x32/5364e8/ffffff?text=AD'">
+          </div>
+          <span>AD Belém Vitápolis</span>
         </div>
         <button id="exitTablet" type="button" class="focus-ring pill border rounded-xl px-4 py-2.5 text-sm font-semibold">
           Sair do Modo Tablet
@@ -400,11 +434,11 @@
       </div>
       <main class="surface rounded-3xl border p-6 sm:p-10 shadow-sm min-h-[500px] flex flex-col justify-center" aria-live="polite">
         <section id="tabletWelcome" class="tablet-step visible text-center">
-          <div class="w-16 h-16 mx-auto rounded-3xl flex items-center justify-center" style="background:#e8ebff;color:#5364e8">
-            <i data-lucide="heart-handshake" width="30"></i>
+          <div class="w-20 h-20 mx-auto rounded-3xl overflow-hidden bg-white border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-md">
+            <img src="https://i.ibb.co/6R2K47G/image-082d65.jpg" alt="Logo AD Belém" class="w-full h-full object-contain p-1" crossorigin="anonymous" onerror="this.src='https://placehold.co/80x80/5364e8/ffffff?text=AD'">
           </div>
           <h1 class="font-bold tracking-tight mt-7 text-3xl">Bem-vindo! É sua primeira vez aqui?</h1>
-          <p class="muted mt-3 text-base">Seu cadastro será salvo diretamente no painel da liderança.</p>
+          <p class="muted mt-3 text-base">Seu cadastro será salvo diretamente no banco de dados do painel.</p>
           <button id="startRegistration" type="button" class="focus-ring w-full mt-8 min-h-16 rounded-2xl font-bold text-white bg-indigo-600 hover:opacity-90 transition text-lg">
             SIM, PRIMEIRA VEZ
           </button>
@@ -462,7 +496,7 @@
           </div>
           <h1 class="font-bold mt-6 text-3xl">Obrigado!</h1>
           <p class="muted text-lg mt-3">Alguém da nossa equipe vai te chamar.</p>
-          <p class="text-sm mt-4 font-semibold text-emerald-600 dark:text-emerald-400">Seu cadastro já aparece no painel administrativo.</p>
+          <p class="text-sm mt-4 font-semibold text-emerald-600 dark:text-emerald-400">Seu cadastro já foi salvo no banco de dados.</p>
           <button id="restartRegistration" type="button" class="focus-ring mt-7 rounded-2xl px-6 min-h-14 font-bold text-white bg-indigo-600 hover:opacity-90 transition">
             Iniciar novo cadastro
           </button>
@@ -475,11 +509,11 @@
 
   <script>
     /**
-     * Application constants & core reactive state store.
+     * Application constants & persistent local storage engine.
      */
     const TODAY = "2026-09-06";
     const CHURCH_NAME = "AD Belém Vitápolis";
-    const STORAGE_KEY = "ad_belem_vitapolis_visitors_v1";
+    const STORAGE_KEY = "ad_belem_vitapolis_visitors_db_v2";
 
     const defaultVisitors = [
       { id: "v1", name: "Mariana Souza", whatsapp: "11987654321", birthday: "08/09", visit_date: "2026-08-30", weekday: "domingo", service: "Culto de domingo", source: "Amigo", prayer_request: "Oração pela família.", status: "Voltou", notes: "Recebeu contato caloroso.", visits_count: 2 },
@@ -490,16 +524,25 @@
     ];
 
     let visitors = loadVisitors();
+    let isMasterUnlocked = false; // Controls master unlock with secret PIN (pastoradbelem*@26) for view/edit/delete
+    let tabletSource = "";
+    let isDarkMode = false;
+    let pendingActionType = null; // 'view', 'edit', 'delete', 'add'
+    let pendingTargetId = null;
+    let selectedId = null;
+    let deletingId = null;
+    const APP_LOGIN_PASSWORD = "123456";
+    const DETAIL_SECRET_PIN = "pastoradbelem*@26";
 
     function loadVisitors() {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
           if (Array.isArray(parsed)) return parsed;
         }
       } catch (e) {
-        console.error("Erro ao carregar do localStorage", e);
+        console.error("Error loading local visitors:", e);
       }
       return [...defaultVisitors];
     }
@@ -508,718 +551,826 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(visitors));
       } catch (e) {
-        console.error("Erro ao salvar no localStorage", e);
+        console.error("Error saving local visitors:", e);
       }
     }
 
-    const automations = [
-      { title: "Reengajamento em 7 dias", description: "Cria alertas para visitantes sem retorno.", tag: "Dashboard", enabled: true },
-      { title: "Mensagem após 24 horas", description: "WhatsApp de boas-vindas após a visita.", tag: "Evolution API — placeholder", enabled: true },
-      { title: "Relatório semanal", description: "Resumo pastoral de visitantes e retornos.", tag: "n8n — placeholder", enabled: false }
-    ];
-
-    let selectedId = null;
-    let deletingId = null;
-    let tabletStep = 1;
-    let tabletSource = "";
-    let isDarkMode = false;
-
-    /**
-     * Utility Helper Functions
-     */
-    const escapeHtml = value => String(value || "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char]));
-    const getWeekday = dateStr => new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", { weekday: "long" });
-    const formatDate = dateStr => new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).replace(".", "");
-    const daysAgo = dateStr => Math.round((new Date(TODAY + "T12:00:00") - new Date(dateStr + "T12:00:00")) / 86400000);
-    const formatPhone = value => {
-      const s = String(value || "").replace(/\D/g, "");
-      return s.length >= 10 ? `(${s.slice(0, 2)}) ${s.slice(2, 7)}-${s.slice(7, 11)}` : s;
-    };
-    const getStatusClass = status => "status-" + status.replace(/\s+/g, "-");
-    const getVisitorById = id => visitors.find(visitor => visitor.id === id);
-
-    /**
-     * Non-blocking Toast Notification Controller
-     */
-    function showToast(message, type = "success") {
-      const box = document.getElementById("toastBox");
-      box.innerHTML = `
-        <div class="toast surface border rounded-2xl px-4 py-4 shadow-lg flex gap-3 items-center">
-          <i data-lucide="${type === "error" ? "circle-alert" : "circle-check"}" style="color:${type === "error" ? "var(--danger)" : "var(--success)"}"></i>
-          <p class="text-sm font-semibold">${escapeHtml(message)}</p>
-        </div>`;
-      lucide.createIcons();
-      setTimeout(() => { box.innerHTML = ""; }, 3200);
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
-    /**
-     * Render Dashboard Analytics, Metrics & Charts
-     */
+    function formatPhone(v) {
+      const nums = v.replace(/\D/g, "");
+      if (nums.length <= 2) return nums;
+      if (nums.length <= 7) return `(${nums.slice(0, 2)}) ${nums.slice(2)}`;
+      if (nums.length <= 11) return `(${nums.slice(0, 2)}) ${nums.slice(2, 7)}-${nums.slice(7)}`;
+      return `(${nums.slice(0, 2)}) ${nums.slice(2, 7)}-${nums.slice(7, 11)}`;
+    }
+
+    function getWeekdayName(dateStr) {
+      if (!dateStr) return "";
+      const d = new Date(dateStr + "T00:00:00");
+      if (isNaN(d.getTime())) return "";
+      const days = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+      return days[d.getDay()];
+    }
+
+    function showToast(msg, type = "success") {
+      const box = document.getElementById("toastBox");
+      const el = document.createElement("div");
+      el.className = `toast mb-2 p-4 rounded-2xl shadow-xl text-white font-semibold flex items-center gap-3 ${type === "error" ? "bg-rose-600" : "bg-slate-900 dark:bg-indigo-600"}`;
+      el.innerHTML = `<i data-lucide="${type === "error" ? "alert-circle" : "check-circle"}" width="20"></i><span>${escapeHtml(msg)}</span>`;
+      box.appendChild(el);
+      lucide.createIcons();
+      setTimeout(() => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(10px)";
+        el.style.transition = "all 0.3s ease";
+        setTimeout(() => el.remove(), 300);
+      }, 3500);
+    }
+
+    // Navigation & Views
+    document.querySelectorAll(".nav-item").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const target = btn.dataset.view;
+        document.querySelectorAll(".view").forEach(v => v.classList.add("hidden"));
+        document.getElementById(target).classList.remove("hidden");
+        if (target === "dashboard") renderDashboard();
+        if (target === "visitors") renderVisitorsTable();
+      };
+    });
+
+    // Theme Toggle
+    document.getElementById("themeButton").onclick = () => {
+      isDarkMode = !isDarkMode;
+      document.documentElement.classList.toggle("dark", isDarkMode);
+      const icon = document.getElementById("themeButton").querySelector("i");
+      icon.setAttribute("data-lucide", isDarkMode ? "sun" : "moon");
+      lucide.createIcons();
+    };
+
+    // Login Form Handler (Password: 123456)
+    document.getElementById("loginForm").onsubmit = e => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const pass = document.getElementById("loginPassword").value.trim();
+      let ok = true;
+
+      const emailErr = document.getElementById("loginEmailError");
+      const passErr = document.getElementById("loginPasswordError");
+      const mainErr = document.getElementById("loginError");
+
+      emailErr.classList.add("hidden");
+      passErr.classList.add("hidden");
+      mainErr.classList.add("hidden");
+
+      if (!email) {
+        emailErr.textContent = "Digite o e-mail de acesso.";
+        emailErr.classList.remove("hidden");
+        ok = false;
+      }
+      if (pass !== APP_LOGIN_PASSWORD) {
+        passErr.textContent = "Senha incorreta. Use 123456.";
+        passErr.classList.remove("hidden");
+        ok = false;
+      }
+      if (!ok) return;
+
+      document.getElementById("loginView").classList.add("hidden");
+      document.getElementById("appView").classList.remove("hidden");
+      renderDashboard();
+      showToast("Bem-vindo ao Painel Pastoral!");
+    };
+
+    document.getElementById("logoutButton").onclick = () => {
+      document.getElementById("appView").classList.add("hidden");
+      document.getElementById("loginView").classList.remove("hidden");
+      document.getElementById("loginPassword").value = "";
+      isMasterUnlocked = false;
+      showToast("Sessão encerrada com segurança.");
+    };
+
+    // Dashboard Rendering
     function renderDashboard() {
-      const todayCount = visitors.filter(v => v.visit_date === TODAY).length;
-      const weekCount = visitors.filter(v => daysAgo(v.visit_date) >= 0 && daysAgo(v.visit_date) <= 6).length;
-      const monthCount = visitors.filter(v => v.visit_date.slice(0, 7) === TODAY.slice(0, 7)).length;
-      const returnRate = visitors.length ? Math.round(visitors.filter(v => v.visits_count >= 2).length / visitors.length * 100) : 0;
-      const birthdays = visitors.filter(v => ["07/09", "08/09", "09/09", "10/09", "11/09", "12/09"].includes(v.birthday));
+      const total = visitors.length;
+      const newCount = visitors.filter(v => v.status === "Novo").length;
+      const returnedCount = visitors.filter(v => v.status === "Voltou").length;
+      const contactCount = visitors.filter(v => v.status === "Em contato").length;
+      const memberCount = visitors.filter(v => v.status === "Membro").length;
 
-      const metrics = [
-        ["Hoje", todayCount, "visitas registradas", "users"],
-        ["Esta semana", weekCount, "últimos 7 dias", "calendar-days"],
-        ["Este mês", monthCount, "setembro de 2026", "calendar"],
-        ["Taxa de retorno", returnRate + "%", "duas visitas ou mais", "repeat-2"],
-        ["Aniversariantes", birthdays.length, "nos próximos 7 dias", "cake-slice"]
-      ];
+      const metricsEl = document.getElementById("metrics");
+      metricsEl.innerHTML = `
+        <div class="surface metric rounded-2xl border p-4">
+          <p class="muted text-xs font-semibold uppercase">Total</p>
+          <p class="text-3xl font-bold mt-2">${total}</p>
+        </div>
+        <div class="surface metric rounded-2xl border p-4">
+          <p class="muted text-xs font-semibold uppercase">Novos</p>
+          <p class="text-3xl font-bold mt-2" style="color:var(--brand)">${newCount}</p>
+        </div>
+        <div class="surface metric rounded-2xl border p-4">
+          <p class="muted text-xs font-semibold uppercase">Em Contato</p>
+          <p class="text-3xl font-bold mt-2" style="color:var(--warn)">${contactCount}</p>
+        </div>
+        <div class="surface metric rounded-2xl border p-4">
+          <p class="muted text-xs font-semibold uppercase">Retornaram</p>
+          <p class="text-3xl font-bold mt-2" style="color:var(--success)">${returnedCount}</p>
+        </div>
+        <div class="surface metric rounded-2xl border p-4 col-span-2 xl:col-span-1">
+          <p class="muted text-xs font-semibold uppercase">Membros</p>
+          <p class="text-3xl font-bold mt-2">${memberCount}</p>
+        </div>
+      `;
 
-      document.getElementById("metrics").innerHTML = metrics.map(m => `
-        <article class="metric surface border rounded-2xl p-4">
-          <i data-lucide="${m[3]}" width="18" style="color:var(--brand)"></i>
-          <p class="text-2xl font-bold mt-3">${m[1]}</p>
-          <p class="text-sm font-semibold mt-1">${m[0]}</p>
-          <p class="muted text-xs mt-2">${m[2]}</p>
-        </article>`).join("");
+      // Trend Chart
+      const trendEl = document.getElementById("trendChart");
+      trendEl.innerHTML = `
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-24 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">2</div>
+          <span class="muted text-xs">Seg</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-16 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">1</div>
+          <span class="muted text-xs">Ter</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-20 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">1</div>
+          <span class="muted text-xs">Qua</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-12 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">0</div>
+          <span class="muted text-xs">Qui</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-16 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">1</div>
+          <span class="muted text-xs">Sex</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center gap-2">
+          <div class="w-full bg-indigo-50 dark:bg-indigo-950 rounded-t-xl h-32 flex items-end justify-center pb-2 font-bold text-sm" style="color:var(--brand)">4</div>
+          <span class="muted text-xs">Dom</span>
+        </div>
+      `;
 
-      document.getElementById("trendChart").innerHTML = [32, 44, 51, 64, 42, 78, Math.max(25, todayCount * 25)].map((height, index) => `
-        <div class="flex-1 flex flex-col justify-end items-center h-full">
-          <div class="bar w-full max-w-8" style="height:${height}%"></div>
-          <span class="muted text-[10px] mt-2">${["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"][index]}</span>
-        </div>`).join("");
-
-      const sources = ["Amigo", "Instagram", "Google", "Passando na frente"];
-      const totalSources = visitors.length || 1;
-      document.getElementById("sourceChart").innerHTML = sources.map(source => {
-        const count = visitors.filter(v => v.source === source).length;
-        const percent = Math.round(count / totalSources * 100);
+      // Source Chart
+      const sources = {};
+      visitors.forEach(v => { sources[v.source] = (sources[v.source] || 0) + 1; });
+      const sourceEl = document.getElementById("sourceChart");
+      sourceEl.innerHTML = Object.entries(sources).map(([src, count]) => {
+        const pct = Math.round((count / visitors.length) * 100);
         return `
           <div>
-            <div class="flex justify-between text-sm">
-              <span>${source}</span>
-              <span class="font-semibold">${percent}%</span>
+            <div class="flex justify-between text-sm mb-1 font-semibold">
+              <span>${escapeHtml(src)}</span>
+              <span class="muted">${count} (${pct}%)</span>
             </div>
-            <div class="h-2 rounded-full mt-2 overflow-hidden" style="background:var(--surface2)">
-              <div class="h-full rounded-full transition-all duration-500" style="background:var(--brand);width:${percent}%"></div>
+            <div class="w-full h-2.5 rounded-full overflow-hidden" style="background:var(--surface2)">
+              <div class="h-full rounded-full" style="width:${pct}%; background:var(--brand)"></div>
             </div>
-          </div>`;
+          </div>
+        `;
       }).join("");
 
-      const lateVisitors = visitors.filter(v => daysAgo(v.visit_date) >= 7 && v.status !== "Membro").slice(0, 3);
-      document.getElementById("reengageList").innerHTML = lateVisitors.length ? lateVisitors.map(v => renderPersonRow(v, `${daysAgo(v.visit_date)} dias sem voltar`)).join("") : `<p class="muted text-sm py-4">Nenhum visitante precisa de reengajamento.</p>`;
-      document.getElementById("birthdayList").innerHTML = birthdays.length ? birthdays.map(v => renderPersonRow(v, `${v.birthday} · aniversário`)).join("") : `<p class="muted text-sm py-4">Sem aniversários nesta semana.</p>`;
-      
+      // Reengage List
+      const reengageEl = document.getElementById("reengageList");
+      const needsAttention = visitors.filter(v => v.status === "Novo" || v.status === "Em contato").slice(0, 3);
+      reengageEl.innerHTML = needsAttention.map(v => `
+        <div class="pill border rounded-2xl p-3.5 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0" style="background:var(--surface); color:var(--brand)">
+              ${escapeHtml(v.name.split(" ").map(n => n[0]).slice(0, 2).join(""))}
+            </div>
+            <div class="min-w-0">
+              <p class="font-bold truncate text-sm">${escapeHtml(v.name)}</p>
+              <p class="muted text-xs">Visita em ${escapeHtml(v.visit_date.split("-").reverse().join("/"))}</p>
+            </div>
+          </div>
+          <button type="button" class="focus-ring rounded-xl px-3.5 py-2 text-xs font-semibold text-white bg-emerald-600 hover:opacity-90 shrink-0" onclick="openWhatsApp('${escapeHtml(v.whatsapp)}')">
+            WhatsApp
+          </button>
+        </div>
+      `).join("");
+
+      // Birthday List
+      const birthdayEl = document.getElementById("birthdayList");
+      const withBirthday = visitors.filter(v => v.birthday).slice(0, 4);
+      birthdayEl.innerHTML = withBirthday.map(v => `
+        <div class="pill border rounded-2xl p-3.5 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0" style="background:var(--surface); color:var(--brand)">
+              ${escapeHtml(v.name.split(" ").map(n => n[0]).slice(0, 2).join(""))}
+            </div>
+            <div class="min-w-0">
+              <p class="font-bold truncate text-sm">${escapeHtml(v.name)}</p>
+              <p class="muted text-xs">${escapeHtml(v.birthday)} · Aniversário</p>
+            </div>
+          </div>
+          <button type="button" class="focus-ring rounded-xl px-3.5 py-2 text-xs font-semibold text-white bg-emerald-600 hover:opacity-90 shrink-0" onclick="openWhatsApp('${escapeHtml(v.whatsapp)}')">
+            WhatsApp
+          </button>
+        </div>
+      `).join("");
+
       lucide.createIcons();
     }
 
-    function renderPersonRow(v, subtitle) {
-      return `
-        <div class="flex justify-between gap-3 items-center">
-          <button type="button" class="viewVisitor focus-ring flex gap-3 items-center text-left" data-id="${v.id}">
-            <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background:var(--surface2);color:var(--brand)">
-              ${escapeHtml(v.name.split(" ").map(x => x[0]).slice(0, 2).join(""))}
-            </div>
-            <div>
-              <p class="text-sm font-semibold">${escapeHtml(v.name)}</p>
-              <p class="muted text-xs">${subtitle}</p>
-            </div>
-          </button>
-          <button type="button" class="contactButton focus-ring rounded-lg px-3 py-2 text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300" data-id="${v.id}">WhatsApp</button>
-        </div>`;
-    }
-
-    /**
-     * Filter & Sort Visitors List
-     */
-    function getFilteredVisitors() {
-      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    // Visitors Table Rendering
+    function renderVisitorsTable() {
+      const search = document.getElementById("searchInput").value.toLowerCase();
       const dateFilter = document.getElementById("dateFilter").value;
       const statusFilter = document.getElementById("statusFilter").value;
-      const sortSelect = document.getElementById("sortSelect").value;
+      const sort = document.getElementById("sortSelect").value;
 
-      let result = visitors.filter(v => {
-        const matchesQuery = !query || v.name.toLowerCase().includes(query) || v.whatsapp.includes(query);
-        const matchesStatus = statusFilter === "all" || v.status === statusFilter;
+      let filtered = visitors.filter(v => {
+        const matchesSearch = v.name.toLowerCase().includes(search) || v.whatsapp.includes(search);
+        let matchesStatus = statusFilter === "all" || v.status === statusFilter;
         let matchesDate = true;
         if (dateFilter === "week") {
-          matchesDate = daysAgo(v.visit_date) >= 0 && daysAgo(v.visit_date) <= 6;
+          const diff = (new Date(TODAY) - new Date(v.visit_date)) / (1000 * 60 * 60 * 24);
+          matchesDate = diff >= 0 && diff <= 7;
         } else if (dateFilter === "month") {
-          matchesDate = v.visit_date.slice(0, 7) === TODAY.slice(0, 7);
+          matchesDate = v.visit_date.startsWith(TODAY.slice(0, 7));
         }
-        return matchesQuery && matchesStatus && matchesDate;
+        return matchesSearch && matchesStatus && matchesDate;
       });
 
-      return result.sort((a, b) => {
-        if (sortSelect === "name") return a.name.localeCompare(b.name, "pt-BR");
-        if (sortSelect === "oldest") return a.visit_date.localeCompare(b.visit_date);
-        return b.visit_date.localeCompare(a.visit_date);
+      filtered.sort((a, b) => {
+        if (sort === "recent") return new Date(b.visit_date) - new Date(a.visit_date);
+        if (sort === "oldest") return new Date(a.visit_date) - new Date(b.visit_date);
+        if (sort === "name") return a.name.localeCompare(b.name);
+        return 0;
       });
-    }
 
-    function renderActionButtons(visitor) {
-      return `
-        <div class="flex gap-2 flex-wrap">
-          <button type="button" class="viewVisitor focus-ring rounded-lg px-2.5 py-2 text-xs font-bold" style="color:var(--brand)" data-id="${visitor.id}" aria-label="Abrir detalhes de ${escapeHtml(visitor.name)}">
-            <i data-lucide="eye" width="16"></i>
-            <span class="sr-only">Ver detalhes</span>
-          </button>
-          <button type="button" class="editVisitor focus-ring pill border rounded-lg px-2.5 py-2 text-xs font-bold" data-id="${visitor.id}">
-            <i data-lucide="pencil" width="16" class="inline"></i> Editar
-          </button>
-          <button type="button" class="deleteVisitor focus-ring rounded-lg px-2.5 py-2 text-xs font-bold bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400" data-id="${visitor.id}">
-            <i data-lucide="trash-2" width="16" class="inline"></i> Excluir
-          </button>
-        </div>`;
-    }
+      document.getElementById("visitorCount").textContent = `${filtered.length} visitantes encontrados`;
+      document.getElementById("emptyVisitors").classList.toggle("hidden", filtered.length > 0);
 
-    function renderVisitors() {
-      const list = getFilteredVisitors();
-      document.getElementById("visitorCount").textContent = `${list.length} de ${visitors.length} visitantes`;
-      document.getElementById("emptyVisitors").classList.toggle("hidden", !!list.length);
-
-      document.getElementById("visitorRows").innerHTML = list.map(v => `
-        <tr class="border-t hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition" style="border-color:var(--line)">
+      const rowsEl = document.getElementById("visitorRows");
+      rowsEl.innerHTML = filtered.map(v => `
+        <tr class="border-b hover:bg-slate-50 dark:hover:bg-slate-800/50 transition" style="border-color:var(--line)">
           <td class="p-3">
-            <p class="font-semibold text-sm">${escapeHtml(v.name)}</p>
-            <p class="muted text-xs">${formatPhone(v.whatsapp)}</p>
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs shrink-0" style="background:var(--surface2); color:var(--brand)">
+                ${escapeHtml(v.name.split(" ").map(n => n[0]).slice(0, 2).join(""))}
+              </div>
+              <div>
+                <p class="font-bold text-sm">${escapeHtml(v.name)}</p>
+                <p class="muted text-xs">${escapeHtml(formatPhone(v.whatsapp))}</p>
+              </div>
+            </div>
           </td>
           <td class="p-3 text-sm">${escapeHtml(v.source)}</td>
-          <td class="p-3 text-sm">${formatDate(v.visit_date)}<span class="block muted text-xs">${v.weekday}</span></td>
-          <td class="p-3 text-sm font-medium">${v.visits_count}x</td>
-          <td class="p-3"><span class="${getStatusClass(v.status)} rounded-full px-2.5 py-1 text-xs font-bold">${v.status}</span></td>
-          <td class="p-3">${renderActionButtons(v)}</td>
-        </tr>`).join("");
-
-      document.getElementById("visitorCards").innerHTML = list.map(v => `
-        <article class="surface border rounded-2xl p-4">
-          <div class="flex justify-between gap-3">
-            <button type="button" class="viewVisitor text-left focus-ring" data-id="${v.id}">
-              <p class="font-bold text-base">${escapeHtml(v.name)}</p>
-              <p class="muted text-sm mt-1">${formatPhone(v.whatsapp)} · ${escapeHtml(v.source)}</p>
-            </button>
-            <span class="${getStatusClass(v.status)} rounded-full px-2.5 py-1 text-xs font-bold h-fit">${v.status}</span>
-          </div>
-          <p class="muted text-xs mt-4">${formatDate(v.visit_date)} · ${v.weekday} · ${v.visits_count} visita(s)</p>
-          <div class="mt-4">${renderActionButtons(v)}</div>
-        </article>`).join("");
-
-      lucide.createIcons();
-    }
-
-    function renderAutomations() {
-      document.getElementById("automationCards").innerHTML = automations.map((automation, index) => `
-        <article class="surface border rounded-2xl p-5 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between gap-4">
-              <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#e8ebff;color:#5364e8">
-                <i data-lucide="zap" width="19"></i>
-              </div>
-              <button type="button" class="automationToggle focus-ring w-11 h-6 rounded-full p-1 transition" data-index="${index}" style="background:${automation.enabled ? "var(--brand)" : "var(--line)"}" aria-label="Alternar ${escapeHtml(automation.title)}" aria-pressed="${automation.enabled}">
-                <span class="block w-4 h-4 rounded-full bg-white transition-all ${automation.enabled ? "ml-5" : "ml-0"}"></span>
+          <td class="p-3 text-sm">${escapeHtml(v.visit_date.split("-").reverse().join("/"))}</td>
+          <td class="p-3 text-sm font-bold">${v.visits_count || 1}</td>
+          <td class="p-3">
+            <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-semibold status-${escapeHtml(v.status.replace(/\s+/g, "-"))}">
+              ${escapeHtml(v.status)}
+            </span>
+          </td>
+          <td class="p-3">
+            <div class="flex items-center gap-1.5">
+              <button type="button" class="focus-ring pill border rounded-xl p-2 text-xs font-semibold hover:opacity-80 transition" title="Ver detalhes" onclick="requestSecretAndExecute('view', '${v.id}')">
+                <i data-lucide="eye" width="16"></i>
+              </button>
+              <button type="button" class="focus-ring pill border rounded-xl p-2 text-xs font-semibold hover:opacity-80 transition editVisitor" title="Editar" data-id="${v.id}">
+                <i data-lucide="edit-3" width="16"></i>
+              </button>
+              <button type="button" class="focus-ring pill border rounded-xl p-2 text-xs font-semibold hover:opacity-80 text-rose-600 transition deleteVisitor" title="Excluir" data-id="${v.id}">
+                <i data-lucide="trash-2" width="16"></i>
               </button>
             </div>
-            <h2 class="font-bold mt-5 text-lg">${escapeHtml(automation.title)}</h2>
-            <p class="muted text-sm leading-relaxed mt-2">${escapeHtml(automation.description)}</p>
+          </td>
+        </tr>
+      `).join("");
+
+      const cardsEl = document.getElementById("visitorCards");
+      cardsEl.innerHTML = filtered.map(v => `
+        <div class="surface border rounded-2xl p-4 flex flex-col gap-3">
+          <div class="flex justify-between items-start gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shrink-0" style="background:var(--surface2); color:var(--brand)">
+                ${escapeHtml(v.name.split(" ").map(n => n[0]).slice(0, 2).join(""))}
+              </div>
+              <div>
+                <p class="font-bold text-base">${escapeHtml(v.name)}</p>
+                <p class="muted text-xs">${escapeHtml(formatPhone(v.whatsapp))}</p>
+              </div>
+            </div>
+            <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-semibold status-${escapeHtml(v.status.replace(/\s+/g, "-"))}">
+              ${escapeHtml(v.status)}
+            </span>
           </div>
-          <span class="inline-block mt-5 rounded-full px-2.5 py-1 text-xs font-semibold w-fit" style="background:var(--surface2);color:var(--muted)">${escapeHtml(automation.tag)}</span>
-        </article>`).join("");
+          <div class="flex justify-between items-center pt-2 border-t text-xs muted" style="border-color:var(--line)">
+            <span>Visita: ${escapeHtml(v.visit_date.split("-").reverse().join("/"))}</span>
+            <div class="flex gap-2">
+              <button type="button" class="focus-ring pill border rounded-xl px-3 py-2 font-semibold" onclick="requestSecretAndExecute('view', '${v.id}')">Ver</button>
+              <button type="button" class="focus-ring pill border rounded-xl px-3 py-2 font-semibold text-rose-600 deleteVisitor" data-id="${v.id}">Excluir</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
       lucide.createIcons();
     }
 
-    function renderAll() {
-      renderDashboard();
-      renderVisitors();
-      renderAutomations();
+    document.getElementById("searchInput").oninput = renderVisitorsTable;
+    document.getElementById("dateFilter").onchange = renderVisitorsTable;
+    document.getElementById("statusFilter").onchange = renderVisitorsTable;
+    document.getElementById("sortSelect").onchange = renderVisitorsTable;
+
+    // Security PIN Gateway for View, Edit, Delete
+    function requestSecretAndExecute(actionType, targetId = null) {
+      pendingActionType = actionType;
+      pendingTargetId = targetId;
+      if (!isMasterUnlocked) {
+        document.getElementById("visitorSecretPin").value = "";
+        document.getElementById("pinError").classList.add("hidden");
+        document.getElementById("detailPinModal").classList.remove("hidden");
+        setTimeout(() => document.getElementById("visitorSecretPin").focus(), 50);
+        return;
+      }
+      executeUnlockedAction();
     }
 
-    function switchView(viewName) {
-      document.querySelectorAll(".view").forEach(el => el.classList.add("hidden"));
-      document.getElementById(viewName).classList.remove("hidden");
-      document.querySelectorAll("[data-view]").forEach(el => el.classList.toggle("active", el.dataset.view === viewName));
+    function executeUnlockedAction() {
+      if (pendingActionType === "view") {
+        selectedId = pendingTargetId;
+        renderDetailContent();
+        document.getElementById("detailPanel").classList.remove("hidden");
+      } else if (pendingActionType === "edit") {
+        openVisitorForm(pendingTargetId);
+      } else if (pendingActionType === "delete") {
+        deletingId = pendingTargetId;
+        document.getElementById("deleteModal").classList.remove("hidden");
+      } else if (pendingActionType === "add") {
+        openVisitorForm();
+      }
+      pendingActionType = null;
+      pendingTargetId = null;
     }
 
-    /**
-     * Modal & Detail Panel Controllers
-     */
+    document.getElementById("pinForm").onsubmit = e => {
+      e.preventDefault();
+      const pin = document.getElementById("visitorSecretPin").value.trim();
+      const errEl = document.getElementById("pinError");
+      if (pin !== DETAIL_SECRET_PIN) {
+        errEl.textContent = "Senha secreta incorreta.";
+        errEl.classList.remove("hidden");
+        showToast("Senha secreta incorreta.", "error");
+        return;
+      }
+      isMasterUnlocked = true;
+      document.getElementById("detailPinModal").classList.add("hidden");
+      executeUnlockedAction();
+      showToast("Acesso restrito liberado com sucesso!");
+    };
+
+    document.getElementById("cancelPin").onclick = () => {
+      document.getElementById("detailPinModal").classList.add("hidden");
+      pendingActionType = null;
+      pendingTargetId = null;
+    };
+
+    function renderDetailContent() {
+      const v = visitors.find(x => x.id === selectedId);
+      if (!v) return;
+      const contentEl = document.getElementById("detailContent");
+      contentEl.innerHTML = `
+        <div class="flex items-center gap-4 mt-4">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-xl shrink-0" style="background:var(--surface2); color:var(--brand)">
+            ${escapeHtml(v.name.split(" ").map(n => n[0]).slice(0, 2).join(""))}
+          </div>
+          <div>
+            <h1 class="font-bold text-2xl">${escapeHtml(v.name)}</h1>
+            <p class="muted text-sm mt-0.5">${escapeHtml(formatPhone(v.whatsapp))}</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mt-6">
+          <div class="surface border rounded-2xl p-4">
+            <p class="muted text-xs font-semibold uppercase">Visitas</p>
+            <p class="text-3xl font-bold mt-1">${v.visits_count || 1}</p>
+          </div>
+          <div class="surface border rounded-2xl p-4">
+            <p class="muted text-xs font-semibold uppercase">Última Visita</p>
+            <p class="text-base font-bold mt-1">${escapeHtml(v.visit_date.split("-").reverse().join("/"))}</p>
+            <p class="muted text-xs mt-0.5">${escapeHtml(v.weekday)}</p>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <label class="block font-semibold text-sm mb-2">Status do Visitante</label>
+          <select id="detailStatusSelect" class="focus-ring surface border rounded-xl w-full p-3 text-sm font-semibold" onchange="updateVisitorStatus('${v.id}', this.value)">
+            <option ${v.status === "Novo" ? "selected" : ""}>Novo</option>
+            <option ${v.status === "Em contato" ? "selected" : ""}>Em contato</option>
+            <option ${v.status === "Voltou" ? "selected" : ""}>Voltou</option>
+            <option ${v.status === "Membro" ? "selected" : ""}>Membro</option>
+          </select>
+        </div>
+
+        <div class="surface border rounded-2xl p-4 mt-6 space-y-3">
+          <h3 class="font-bold text-sm">Dados da visita</h3>
+          <div class="text-sm space-y-1.5">
+            <p><span class="muted">Serviço:</span> <strong>${escapeHtml(v.service)}</strong></p>
+            <p><span class="muted">Origem:</span> <strong>${escapeHtml(v.source)}</strong></p>
+            <p><span class="muted">Aniversário:</span> <strong>${escapeHtml(v.birthday || "Não informado")}</strong></p>
+          </div>
+        </div>
+
+        <div class="surface border rounded-2xl p-4 mt-6">
+          <h3 class="font-bold text-sm">Pedido de oração</h3>
+          <p class="text-sm mt-2 leading-relaxed">${escapeHtml(v.prayer_request || "Nenhum pedido registrado.")}</p>
+        </div>
+
+        <div class="mt-6">
+          <label class="block font-semibold text-sm mb-2" for="detailNotes">Notas internas e histórico</label>
+          <textarea id="detailNotes" class="focus-ring surface border rounded-xl w-full p-3 text-sm min-h-24" placeholder="Escreva observações pastorais..." onblur="updateVisitorNotes('${v.id}', this.value)">${escapeHtml(v.notes || "")}</textarea>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function updateVisitorStatus(id, newStatus) {
+      const v = visitors.find(x => x.id === id);
+      if (v) {
+        v.status = newStatus;
+        saveVisitors();
+        renderVisitorsTable();
+        renderDashboard();
+        showToast("Status atualizado com sucesso!");
+      }
+    }
+
+    function updateVisitorNotes(id, newNotes) {
+      const v = visitors.find(x => x.id === id);
+      if (v && v.notes !== newNotes) {
+        v.notes = newNotes;
+        saveVisitors();
+        showToast("Notas salvas automaticamente.");
+      }
+    }
+
+    document.getElementById("closeDetail").onclick = () => {
+      document.getElementById("detailPanel").classList.add("hidden");
+    };
+
+    document.getElementById("detailEdit").onclick = () => {
+      const idToEdit = selectedId;
+      document.getElementById("detailPanel").classList.add("hidden");
+      requestSecretAndExecute("edit", idToEdit);
+    };
+
+    document.getElementById("detailWhatsApp").onclick = () => {
+      const v = visitors.find(x => x.id === selectedId);
+      if (v) openWhatsApp(v.whatsapp);
+    };
+
+    function openWhatsApp(whatsapp) {
+      const num = whatsapp.replace(/\D/g, "");
+      const msg = encodeURIComponent("🙏 Agradecemos de coração pela sua visita à nossa igreja! Foi uma grande alegria receber você conosco. Se precisar de uma oração no seu lar é só nos comunicar. Que Deus abençoe sua vida, sua família e que possamos nos encontrar novamente em breve. ❤️🙌 Atenciosamente, Pastor Vivaldino Leal");
+      window.open(`https://api.whatsapp.com/send?phone=55${num}&text=${msg}`, "_blank");
+    }
+
+    // Modal Handling for Add / Edit
+    let editingVisitorId = null;
+
     function openVisitorForm(id = null) {
-      selectedId = id;
-      const form = document.getElementById("visitorForm");
-      form.reset();
+      editingVisitorId = id;
+      const title = document.getElementById("form-title");
+      const btn = document.getElementById("saveVisitorForm");
       document.getElementById("formError").classList.add("hidden");
 
-      const visitor = id ? getVisitorById(id) : null;
-      document.getElementById("form-title").textContent = visitor ? "Editar visitante" : "Cadastrar visitante";
-
-      if (visitor) {
-        document.getElementById("formName").value = visitor.name;
-        document.getElementById("formWhatsapp").value = formatPhone(visitor.whatsapp);
-        document.getElementById("formBirthday").value = visitor.birthday;
-        document.getElementById("formVisitDate").value = visitor.visit_date;
-        document.getElementById("formWeekday").value = visitor.weekday;
-        document.getElementById("formService").value = visitor.service;
-        document.getElementById("formSource").value = visitor.source;
-        document.getElementById("formStatus").value = visitor.status;
-        document.getElementById("formPrayer").value = visitor.prayer_request;
-        document.getElementById("formNotes").value = visitor.notes;
+      if (id) {
+        title.textContent = "Editar visitante";
+        btn.textContent = "Salvar alterações";
+        const v = visitors.find(x => x.id === id);
+        if (v) {
+          document.getElementById("formName").value = v.name;
+          document.getElementById("formWhatsapp").value = formatPhone(v.whatsapp);
+          document.getElementById("formBirthday").value = v.birthday;
+          document.getElementById("formVisitDate").value = v.visit_date;
+          document.getElementById("formWeekday").value = v.weekday;
+          document.getElementById("formService").value = v.service;
+          document.getElementById("formSource").value = v.source;
+          document.getElementById("formStatus").value = v.status;
+          document.getElementById("formPrayer").value = v.prayer_request;
+          document.getElementById("formNotes").value = v.notes;
+        }
       } else {
+        title.textContent = "Cadastrar visitante";
+        btn.textContent = "Salvar visitante";
+        document.getElementById("visitorForm").reset();
         document.getElementById("formVisitDate").value = TODAY;
-        updateFormWeekday();
+        document.getElementById("formWeekday").value = getWeekdayName(TODAY);
       }
 
       document.getElementById("visitorModal").classList.remove("hidden");
-      setTimeout(() => document.getElementById("formName").focus(), 50);
     }
 
     function closeVisitorForm() {
       document.getElementById("visitorModal").classList.add("hidden");
-      selectedId = null;
+      editingVisitorId = null;
     }
 
-    function updateFormWeekday() {
-      const dateVal = document.getElementById("formVisitDate").value;
-      document.getElementById("formWeekday").value = dateVal ? getWeekday(dateVal) : "";
-    }
+    document.getElementById("formVisitDate").onchange = e => {
+      document.getElementById("formWeekday").value = getWeekdayName(e.target.value);
+    };
 
-    function showVisitorDetail(id) {
-      selectedId = id;
-      renderDetailContent();
-      document.getElementById("detailPanel").classList.remove("hidden");
-    }
+    document.getElementById("formWhatsapp").oninput = e => {
+      e.target.value = formatPhone(e.target.value);
+    };
 
-    function renderDetailContent() {
-      const v = getVisitorById(selectedId);
-      if (!v) {
-        document.getElementById("detailPanel").classList.add("hidden");
+    document.getElementById("visitorForm").onsubmit = e => {
+      e.preventDefault();
+      const name = document.getElementById("formName").value.trim();
+      const whatsapp = document.getElementById("formWhatsapp").value.replace(/\D/g, "");
+      const birthday = document.getElementById("formBirthday").value.trim();
+      const visit_date = document.getElementById("formVisitDate").value;
+      const weekday = document.getElementById("formWeekday").value;
+      const service = document.getElementById("formService").value;
+      const source = document.getElementById("formSource").value;
+      const status = document.getElementById("formStatus").value;
+      const prayer_request = document.getElementById("formPrayer").value.trim();
+      const notes = document.getElementById("formNotes").value.trim();
+
+      const errEl = document.getElementById("formError");
+      if (!name || !whatsapp || !visit_date) {
+        errEl.textContent = "Preencha os campos obrigatórios (Nome, WhatsApp e Data).";
+        errEl.classList.remove("hidden");
         return;
       }
 
-      document.getElementById("detailContent").innerHTML = `
-        <div class="flex gap-4 items-center">
-          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold shrink-0" style="background:#e8ebff;color:#5364e8">
-            ${escapeHtml(v.name.split(" ").map(x => x[0]).slice(0, 2).join(""))}
+      if (whatsapp.length < 10) {
+        errEl.textContent = "Digite um número de WhatsApp válido com DDD.";
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      if (editingVisitorId) {
+        const v = visitors.find(x => x.id === editingVisitorId);
+        if (v) {
+          v.name = name;
+          v.whatsapp = whatsapp;
+          v.birthday = birthday;
+          v.visit_date = visit_date;
+          v.weekday = weekday;
+          v.service = service;
+          v.source = source;
+          v.status = status;
+          v.prayer_request = prayer_request;
+          v.notes = notes;
+        }
+        showToast("Visitante atualizado com sucesso!");
+      } else {
+        const newV = {
+          id: "v_" + Date.now(),
+          name,
+          whatsapp,
+          birthday,
+          visit_date,
+          weekday,
+          service,
+          source,
+          prayer_request,
+          status,
+          notes,
+          visits_count: 1
+        };
+        visitors.unshift(newV);
+        showToast("Novo visitante cadastrado com sucesso!");
+      }
+
+      saveVisitors();
+      closeVisitorForm();
+      renderVisitorsTable();
+      renderDashboard();
+    };
+
+    // Dashboard & Visitor Table Modals Triggers
+    document.getElementById("dashboardAdd").onclick = () => {
+      openVisitorForm();
+    };
+    document.getElementById("visitorAdd").onclick = () => {
+      openVisitorForm();
+    };
+    document.getElementById("closeVisitorModal").onclick = closeVisitorForm;
+    document.getElementById("cancelVisitorForm").onclick = closeVisitorForm;
+
+    // Table action event delegation for Edit & Delete (Protected by secret PIN)
+    document.addEventListener("click", e => {
+      const editBtn = e.target.closest(".editVisitor");
+      if (editBtn) {
+        requestSecretAndExecute("edit", editBtn.dataset.id);
+        return;
+      }
+      const deleteBtn = e.target.closest(".deleteVisitor");
+      if (deleteBtn) {
+        requestSecretAndExecute("delete", deleteBtn.dataset.id);
+        return;
+      }
+    });
+
+    document.getElementById("cancelDelete").onclick = () => {
+      deletingId = null;
+      document.getElementById("deleteModal").classList.add("hidden");
+    };
+
+    document.getElementById("confirmDelete").onclick = () => {
+      if (deletingId) {
+        visitors = visitors.filter(x => x.id !== deletingId);
+        saveVisitors();
+        renderVisitorsTable();
+        renderDashboard();
+        showToast("Visitante excluído do banco de dados.");
+      }
+      deletingId = null;
+      document.getElementById("deleteModal").classList.add("hidden");
+    };
+
+    // Automations tab
+    const automationCards = [
+      { title: "Boas-vindas Automáticas", desc: "Envia mensagem carinhosa via WhatsApp 2h após o culto.", active: true },
+      { title: "Pesquisa de Satisfação", desc: "Pergunta como foi a primeira experiência após 3 dias.", active: true },
+      { title: "Aviso de Aniversário", desc: "Dispara felicitações personalizadas no dia do aniversário.", active: false }
+    ];
+    document.getElementById("automationCards").innerHTML = automationCards.map(a => `
+      <div class="surface rounded-2xl border p-5 flex flex-col justify-between gap-4">
+        <div>
+          <div class="flex justify-between items-start gap-2">
+            <h2 class="font-bold text-lg">${escapeHtml(a.title)}</h2>
+            <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${a.active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400" : "pill muted"}">
+              ${a.active ? "Ativo" : "Inativo"}
+            </span>
           </div>
-          <div class="min-w-0">
-            <h2 class="text-2xl font-bold truncate">${escapeHtml(v.name)}</h2>
-            <p class="muted mt-1 text-sm">${formatPhone(v.whatsapp)}</p>
-          </div>
+          <p class="muted text-sm mt-2">${escapeHtml(a.desc)}</p>
         </div>
+      </div>
+    `).join("");
 
-        <div class="grid grid-cols-2 gap-3 mt-7">
-          <div class="pill border rounded-xl p-3">
-            <p class="muted text-xs font-semibold">VISITAS</p>
-            <p class="font-bold mt-1 text-lg">${v.visits_count}</p>
-          </div>
-          <div class="pill border rounded-xl p-3">
-            <p class="muted text-xs font-semibold">ÚLTIMA VISITA</p>
-            <p class="font-bold mt-1 text-sm">${formatDate(v.visit_date)}</p>
-            <p class="muted text-xs">${v.weekday}</p>
-          </div>
-        </div>
+    document.getElementById("runAutomation").onclick = () => {
+      showToast("Automação executada com sucesso em modo de simulação.");
+    };
 
-        <section class="mt-7">
-          <h3 class="font-bold text-base">Status</h3>
-          <label class="sr-only" for="detailStatus">Status do visitante</label>
-          <select id="detailStatus" class="focus-ring surface border rounded-xl w-full mt-3 p-3 text-sm">
-            ${["Novo", "Em contato", "Voltou", "Membro"].map(status => `<option ${v.status === status ? "selected" : ""}>${status}</option>`).join("")}
-          </select>
-        </section>
+    // Settings
+    document.getElementById("resetDatabase").onclick = () => {
+      if (confirm("Tem certeza que deseja restaurar os dados originais? Todos os cadastros adicionados serão perdidos.")) {
+        visitors = [...defaultVisitors];
+        saveVisitors();
+        renderDashboard();
+        renderVisitorsTable();
+        showToast("Banco de dados restaurado para o padrão de fábrica.");
+      }
+    };
 
-        <section class="mt-7">
-          <h3 class="font-bold text-base">Dados da visita</h3>
-          <div class="pill border rounded-xl p-3 mt-3 text-sm space-y-2">
-            <p><strong>Serviço:</strong> ${escapeHtml(v.service)}</p>
-            <p><strong>Origem:</strong> ${escapeHtml(v.source)}</p>
-            <p><strong>Aniversário:</strong> ${escapeHtml(v.birthday || "Não informado")}</p>
-          </div>
-        </section>
+    // Tablet Kiosk Mode
+    let tabletStep = 0;
+    const tabletData = { name: "", whatsapp: "", visit_date: TODAY, source: "Instagram", prayer_request: "" };
 
-        <section class="mt-7">
-          <h3 class="font-bold text-base">Pedido de oração</h3>
-          <p class="muted text-sm mt-2 leading-relaxed">${escapeHtml(v.prayer_request || "Nenhum pedido registrado.")}</p>
-        </section>
-
-        <section class="mt-7">
-          <h3 class="font-bold text-base">Notas</h3>
-          <label class="sr-only" for="noteInput">Notas sobre visitante</label>
-          <textarea id="noteInput" class="focus-ring surface border rounded-xl p-3 w-full min-h-28 mt-3 text-sm">${escapeHtml(v.notes)}</textarea>
-          <button id="saveNote" type="button" class="focus-ring rounded-xl px-4 py-3 mt-3 font-semibold text-sm text-white bg-indigo-600 hover:opacity-90 transition w-full">Salvar nota</button>
-        </section>
-
-        <div class="grid grid-cols-2 gap-3 mt-7">
-          <button id="markContacted" type="button" class="focus-ring rounded-xl min-h-12 font-bold text-xs bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-200 transition">Marcar contatado</button>
-          <button id="addVisit" type="button" class="focus-ring rounded-xl min-h-12 font-bold text-xs text-white bg-indigo-600 hover:opacity-90 transition">Registrar retorno</button>
-        </div>
-        <button id="detailEdit" type="button" class="focus-ring pill border rounded-xl w-full min-h-12 mt-3 font-semibold text-sm">Editar cadastro</button>`;
-
-      document.getElementById("detailStatus").onchange = e => {
-        v.status = e.target.value;
-        renderAll();
-        showToast("Status atualizado com sucesso.");
-      };
-      document.getElementById("saveNote").onclick = () => {
-        v.notes = document.getElementById("noteInput").value.trim();
-        renderAll();
-        showToast("Nota salva no cadastro.");
-      };
-      document.getElementById("markContacted").onclick = () => {
-        v.status = "Em contato";
-        renderAll();
-        renderDetailContent();
-        showToast("Visitante marcado como contatado.");
-      };
-      document.getElementById("addVisit").onclick = () => {
-        v.visits_count++;
-        v.visit_date = TODAY;
-        v.weekday = getWeekday(TODAY);
-        v.status = v.status === "Novo" ? "Voltou" : v.status;
-        renderAll();
-        renderDetailContent();
-        showToast("Visita recorrente registrada.");
-      };
-      document.getElementById("detailEdit").onclick = () => openVisitorForm(v.id);
+    function openTabletMode() {
+      tabletStep = 0;
+      tabletData.name = "";
+      tabletData.whatsapp = "";
+      tabletData.visit_date = TODAY;
+      tabletData.source = "Instagram";
+      tabletData.prayer_request = "";
+      document.getElementById("tabletName").value = "";
+      document.getElementById("tabletWhatsapp").value = "";
+      document.getElementById("tabletDate").value = TODAY;
+      document.getElementById("tabletPrayer").value = "";
+      updateTabletWizard();
+      document.getElementById("tabletView").classList.remove("hidden");
     }
 
-    function openWhatsApp(visitor) {
-      if (!visitor) return;
-      const cleanPhone = visitor.whatsapp.replace(/\D/g, "");
-      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes com sua visita.`)}`, "_blank", "noopener,noreferrer");
-      showToast("Abrindo conversa do WhatsApp em uma nova aba.");
-    }
-
-    /**
-     * Tablet Mode Controllers
-     */
-    function showTabletStep(stepId) {
-      document.querySelectorAll(".tablet-step").forEach(el => el.classList.remove("visible"));
-      document.getElementById(stepId).classList.add("visible");
-    }
+    document.getElementById("tabletButton").onclick = openTabletMode;
+    document.getElementById("mobileTabletButton").onclick = openTabletMode;
+    document.getElementById("exitTablet").onclick = () => {
+      document.getElementById("tabletView").classList.add("hidden");
+      renderDashboard();
+      renderVisitorsTable();
+    };
+    document.getElementById("restartRegistration").onclick = openTabletMode;
+    document.getElementById("recurringButton").onclick = () => {
+      tabletStep = 1;
+      updateTabletWizard();
+    };
+    document.getElementById("startRegistration").onclick = () => {
+      tabletStep = 1;
+      updateTabletWizard();
+    };
 
     function updateTabletWizard() {
-      document.querySelectorAll(".form-step").forEach(el => el.classList.toggle("hidden", Number(el.dataset.step) !== tabletStep));
-      document.getElementById("stepLabel").textContent = ["Seu nome", "Seu WhatsApp", "Data da visita", "Como conheceu", "Pedido de oração"][tabletStep - 1];
-      document.getElementById("stepCount").textContent = `${tabletStep} de 5`;
-      document.getElementById("stepProgress").style.width = `${tabletStep * 20}%`;
+      const steps = document.querySelectorAll(".tablet-step");
+      steps.forEach(s => s.classList.remove("visible"));
+
+      if (tabletStep === 0) {
+        document.getElementById("tabletWelcome").classList.add("visible");
+        return;
+      }
+      if (tabletStep === 6) {
+        document.getElementById("tabletThanks").classList.add("visible");
+        // Save to database
+        const newV = {
+          id: "v_" + Date.now(),
+          name: tabletData.name,
+          whatsapp: tabletData.whatsapp.replace(/\D/g, ""),
+          birthday: "",
+          visit_date: tabletData.visit_date,
+          weekday: getWeekdayName(tabletData.visit_date),
+          service: "Culto de domingo",
+          source: tabletData.source,
+          prayer_request: tabletData.prayer_request,
+          status: "Novo",
+          notes: "Cadastrado via Modo Tablet da Igreja",
+          visits_count: 1
+        };
+        visitors.unshift(newV);
+        saveVisitors();
+        return;
+      }
+
+      const form = document.getElementById("tabletForm");
+      form.classList.add("visible");
+      document.getElementById("stepCount").textContent = `Passo ${tabletStep} de 5`;
+      document.getElementById("stepProgress").style.width = `${(tabletStep / 5) * 100}%`;
+      const labels = ["", "Identificação", "Contato", "Data da Visita", "Origem", "Pedido de Oração"];
+      document.getElementById("stepLabel").textContent = labels[tabletStep];
+
+      form.querySelectorAll(".form-step").forEach(fs => {
+        if (parseInt(fs.dataset.step) === tabletStep) {
+          fs.classList.remove("hidden");
+        } else {
+          fs.classList.add("hidden");
+        }
+      });
+
       document.getElementById("stepBack").classList.toggle("hidden", tabletStep === 1);
       document.getElementById("tabletError").classList.add("hidden");
+
+      if (tabletStep === 3) {
+        document.getElementById("tabletWeekday").textContent = `Dia da semana: ${getWeekdayName(document.getElementById("tabletDate").value)}`;
+      }
     }
 
-    function resetTabletWizard() {
-      tabletStep = 1;
-      tabletSource = "";
-      document.getElementById("tabletForm").reset();
-      document.querySelectorAll(".sourceOption").forEach(el => {
-        el.style.background = "";
-        el.style.color = "";
-      });
-      showTabletStep("tabletWelcome");
-    }
+    document.getElementById("tabletDate").onchange = e => {
+      document.getElementById("tabletWeekday").textContent = `Dia da semana: ${getWeekdayName(e.target.value)}`;
+    };
 
-    function setTabletError(msg) {
-      const errEl = document.getElementById("tabletError");
-      errEl.textContent = msg;
-      errEl.classList.remove("hidden");
-    }
+    document.getElementById("tabletWhatsapp").oninput = e => {
+      e.target.value = formatPhone(e.target.value);
+    };
 
-    /**
-     * Event Listeners & Initializations
-     */
-    window.addEventListener("DOMContentLoaded", () => {
-      // Login form handler
-      document.getElementById("loginForm").onsubmit = e => {
-        e.preventDefault();
-        const emailInput = document.getElementById("loginEmail");
-        const passwordInput = document.getElementById("loginPassword");
-        const emailErr = document.getElementById("loginEmailError");
-        const passErr = document.getElementById("loginPasswordError");
-        const loginErr = document.getElementById("loginError");
-        const loginBtn = document.getElementById("demoLogin");
-
-        emailErr.classList.add("hidden");
-        passErr.classList.add("hidden");
-        loginErr.classList.add("hidden");
-
-        let isValid = true;
-        if (!emailInput.value.trim()) {
-          emailErr.textContent = "Informe seu e-mail.";
-          emailErr.classList.remove("hidden");
-          isValid = false;
-        } else if (!emailInput.validity.valid) {
-          emailErr.textContent = "Informe um e-mail válido.";
-          emailErr.classList.remove("hidden");
-          isValid = false;
-        }
-        if (!passwordInput.value) {
-          passErr.textContent = "Informe sua senha.";
-          passErr.classList.remove("hidden");
-          isValid = false;
-        }
-        if (!isValid) return;
-
-        loginBtn.disabled = true;
-        loginBtn.setAttribute("aria-busy", "true");
-
-        setTimeout(() => {
-          if (emailInput.value.trim().toLowerCase() !== "pastor@visitaadbelemvitapolis.com" || passwordInput.value !== "123456") {
-            loginErr.textContent = "Credenciais inválidas. Use os dados demonstrativos exibidos abaixo.";
-            loginErr.classList.remove("hidden");
-            showToast("Não foi possível entrar: credenciais inválidas.", "error");
-            loginBtn.disabled = false;
-            loginBtn.removeAttribute("aria-busy");
-            return;
-          }
-          document.getElementById("loginView").classList.add("hidden");
-          document.getElementById("appView").classList.remove("hidden");
-          renderAll();
-          showToast("Login realizado com sucesso. Bem-vindo ao painel.");
-          loginBtn.disabled = false;
-          loginBtn.removeAttribute("aria-busy");
-        }, 650);
+    document.querySelectorAll(".sourceOption").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".sourceOption").forEach(b => b.classList.remove("ring-2", "ring-indigo-600"));
+        btn.classList.add("ring-2", "ring-indigo-600");
+        tabletData.source = btn.dataset.source;
       };
+    });
 
-      document.getElementById("logoutButton").onclick = () => {
-        document.getElementById("appView").classList.add("hidden");
-        document.getElementById("loginView").classList.remove("hidden");
-        showToast("Você saiu do painel demonstrativo.");
-      };
-
-      // Navigation View Switchers
-      document.querySelectorAll("[data-view]").forEach(btn => {
-        btn.onclick = () => switchView(btn.dataset.view);
-      });
-
-      // Theme toggle
-      document.getElementById("themeButton").onclick = () => {
-        isDarkMode = !isDarkMode;
-        document.documentElement.classList.toggle("dark", isDarkMode);
-        document.body.classList.toggle("dark", isDarkMode);
-        document.getElementById("themeButton").innerHTML = `<i data-lucide="${isDarkMode ? "sun" : "moon"}" width="18"></i>`;
-        lucide.createIcons();
-        showToast(isDarkMode ? "Modo escuro ativado." : "Modo claro ativado.");
-      };
-
-      // Modals & Forms
-      document.getElementById("dashboardAdd").onclick = () => openVisitorForm();
-      document.getElementById("visitorAdd").onclick = () => openVisitorForm();
-      document.getElementById("closeVisitorModal").onclick = closeVisitorForm;
-      document.getElementById("cancelVisitorForm").onclick = closeVisitorForm;
-      document.getElementById("formVisitDate").onchange = updateFormWeekday;
-
-      document.getElementById("formWhatsapp").oninput = e => {
-        const val = e.target.value.replace(/\D/g, "").slice(0, 11);
-        e.target.value = formatPhone(val);
-      };
-      document.getElementById("formBirthday").oninput = e => {
-        let v = e.target.value.replace(/\D/g, "").slice(0, 4);
-        if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2);
-        e.target.value = v;
-      };
-
-      document.getElementById("visitorForm").onsubmit = e => {
-        e.preventDefault();
-        const name = document.getElementById("formName").value.trim();
-        const whatsappDigits = document.getElementById("formWhatsapp").value.replace(/\D/g, "");
-        const visitDate = document.getElementById("formVisitDate").value;
-
-        if (!name || whatsappDigits.length < 10 || !visitDate) {
-          const err = document.getElementById("formError");
-          err.textContent = "Preencha nome, WhatsApp válido e data da visita.";
-          err.classList.remove("hidden");
-          return;
-        }
-
-        const record = {
-          id: selectedId || `v-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-          name,
-          whatsapp: whatsappDigits,
-          birthday: document.getElementById("formBirthday").value.trim(),
-          visit_date: visitDate,
-          weekday: getWeekday(visitDate),
-          service: document.getElementById("formService").value,
-          source: document.getElementById("formSource").value,
-          prayer_request: document.getElementById("formPrayer").value.trim(),
-          status: document.getElementById("formStatus").value,
-          notes: document.getElementById("formNotes").value.trim(),
-          visits_count: 1
-        };
-
-        const saveBtn = document.getElementById("saveVisitorForm");
-        saveBtn.disabled = true;
-
-        if (selectedId) {
-          const existing = getVisitorById(selectedId);
-          record.visits_count = existing.visits_count;
-          Object.assign(existing, record);
-          showToast("Cadastro atualizado e salvo com sucesso.");
-        } else {
-          visitors.unshift(record);
-          showToast("Visitante cadastrado e salvo no painel.");
-        }
-
-        saveVisitors();
-        saveBtn.disabled = false;
-        closeVisitorForm();
-        renderAll();
-        if (selectedId && !document.getElementById("detailPanel").classList.contains("hidden")) {
-          renderDetailContent();
-        }
-      };
-
-      // Search & Filters
-      ["searchInput", "dateFilter", "statusFilter", "sortSelect"].forEach(id => {
-        document.getElementById(id).addEventListener(id === "searchInput" ? "input" : "change", renderVisitors);
-      });
-
-      document.getElementById("closeDetail").onclick = () => document.getElementById("detailPanel").classList.add("hidden");
-      document.getElementById("detailWhatsApp").onclick = () => openWhatsApp(getVisitorById(selectedId));
-
-      // Delete confirmation modal
-      document.getElementById("cancelDelete").onclick = () => {
-        deletingId = null;
-        document.getElementById("deleteModal").classList.add("hidden");
-      };
-      document.getElementById("confirmDelete").onclick = () => {
-        if (!deletingId) return;
-        visitors = visitors.filter(v => v.id !== deletingId);
-        saveVisitors();
-        if (selectedId === deletingId) {
-          selectedId = null;
-          document.getElementById("detailPanel").classList.add("hidden");
-        }
-        deletingId = null;
-        document.getElementById("deleteModal").classList.add("hidden");
-        renderAll();
-        showToast("Visitante excluído e alterações salvas.");
-      };
-
-      // Global event delegation for table / card buttons
-      document.addEventListener("click", event => {
-        const viewEl = event.target.closest(".viewVisitor");
-        const editEl = event.target.closest(".editVisitor");
-        const delEl = event.target.closest(".deleteVisitor");
-        const contactEl = event.target.closest(".contactButton");
-        const toggleEl = event.target.closest(".automationToggle");
-
-        if (viewEl) showVisitorDetail(viewEl.dataset.id);
-        if (editEl) openVisitorForm(editEl.dataset.id);
-        if (delEl) {
-          deletingId = delEl.dataset.id;
-          document.getElementById("deleteModal").classList.remove("hidden");
-        }
-        if (contactEl) openWhatsApp(getVisitorById(contactEl.dataset.id));
-        if (toggleEl) {
-          const auto = automations[Number(toggleEl.dataset.index)];
-          auto.enabled = !auto.enabled;
-          renderAutomations();
-          showToast(`Automação ${auto.enabled ? "ativada" : "desativada"} localmente.`);
-        }
-      });
-
-      document.getElementById("runAutomation").onclick = () => {
-        const btn = document.getElementById("runAutomation");
-        btn.disabled = true;
-        setTimeout(() => {
-          btn.disabled = false;
-          showToast("Demonstração concluída: alertas preparados localmente.");
-        }, 700);
-      };
-
-      // Tablet Mode Controls
-      const openTabletMode = () => {
-        document.getElementById("tabletView").classList.remove("hidden");
-        showTabletStep("tabletWelcome");
-      };
-      document.getElementById("tabletButton").onclick = openTabletMode;
-      document.getElementById("mobileTabletButton").onclick = openTabletMode;
-      document.getElementById("exitTablet").onclick = () => {
-        document.getElementById("tabletView").classList.add("hidden");
-        showToast("Modo Tablet fechado. Os registros continuam no painel.");
-      };
-      document.getElementById("startRegistration").onclick = () => {
-        showTabletStep("tabletForm");
-        updateTabletWizard();
-      };
-      document.getElementById("restartRegistration").onclick = resetTabletWizard;
-
-      document.getElementById("tabletDate").onchange = () => {
-        const d = document.getElementById("tabletDate").value;
-        document.getElementById("tabletWeekday").textContent = d ? `Dia da semana: ${getWeekday(d)}` : "";
-      };
-      document.getElementById("tabletWhatsapp").oninput = e => {
-        e.target.value = formatPhone(e.target.value.replace(/\D/g, "").slice(0, 11));
-      };
-
-      document.querySelectorAll(".sourceOption").forEach(btn => {
-        btn.onclick = () => {
-          tabletSource = btn.dataset.source;
-          document.querySelectorAll(".sourceOption").forEach(el => {
-            el.style.background = "";
-            el.style.color = "";
-          });
-          btn.style.background = "var(--brand)";
-          btn.style.color = "#fff";
-        };
-      });
-
-      document.getElementById("stepBack").onclick = () => {
+    document.getElementById("stepBack").onclick = () => {
+      if (tabletStep > 1) {
         tabletStep--;
         updateTabletWizard();
-      };
+      }
+    };
 
-      document.getElementById("stepNext").onclick = () => {
-        const name = document.getElementById("tabletName").value.trim();
-        const wa = document.getElementById("tabletWhatsapp").value.replace(/\D/g, "");
-        const visitDate = document.getElementById("tabletDate").value;
-
-        if (tabletStep === 1 && !name) return setTabletError("Por favor, informe seu nome.");
-        if (tabletStep === 2 && wa.length < 10) return setTabletError("Informe um WhatsApp válido.");
-        if (tabletStep === 3 && !visitDate) return setTabletError("A data da visita é obrigatória.");
-        if (tabletStep === 4 && !tabletSource) return setTabletError("Escolha como você nos conheceu.");
-
-        if (tabletStep < 5) {
-          tabletStep++;
-          updateTabletWizard();
+    document.getElementById("stepNext").onclick = () => {
+      const errEl = document.getElementById("tabletError");
+      if (tabletStep === 1) {
+        const val = document.getElementById("tabletName").value.trim();
+        if (!val) {
+          errEl.textContent = "Por favor, digite seu nome.";
+          errEl.classList.remove("hidden");
           return;
         }
-
-        const nextBtn = document.getElementById("stepNext");
-        nextBtn.disabled = true;
-
-        visitors.unshift({
-          id: `v-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-          name,
-          whatsapp: wa,
-          birthday: "",
-          visit_date: visitDate,
-          weekday: getWeekday(visitDate),
-          service: "Culto de domingo",
-          source: tabletSource,
-          prayer_request: document.getElementById("tabletPrayer").value.trim(),
-          status: "Novo",
-          notes: "Cadastro realizado no Modo Tablet.",
-          visits_count: 1
-        });
-
-        saveVisitors();
-        nextBtn.disabled = false;
-        renderAll();
-        showTabletStep("tabletThanks");
-        showToast("Cadastro do Tablet salvo com sucesso.");
-      };
-
-      document.getElementById("recurringButton").onclick = () => {
-        const firstVisitor = visitors[0];
-        if (!firstVisitor) {
-          showToast("Ainda não há visitante para registrar retorno.", "error");
+        tabletData.name = val;
+      } else if (tabletStep === 2) {
+        const val = document.getElementById("tabletWhatsapp").value.replace(/\D/g, "");
+        if (val.length < 10) {
+          errEl.textContent = "Digite um WhatsApp válido com DDD.";
+          errEl.classList.remove("hidden");
           return;
         }
-        firstVisitor.visits_count++;
-        firstVisitor.visit_date = TODAY;
-        firstVisitor.weekday = getWeekday(TODAY);
-        firstVisitor.status = firstVisitor.status === "Novo" ? "Voltou" : firstVisitor.status;
-        saveVisitors();
-        renderAll();
-        showToast(`Retorno de ${firstVisitor.name} registrado e salvo.`);
-      };
+        tabletData.whatsapp = val;
+      } else if (tabletStep === 3) {
+        tabletData.visit_date = document.getElementById("tabletDate").value;
+      } else if (tabletStep === 5) {
+        tabletData.prayer_request = document.getElementById("tabletPrayer").value.trim();
+      }
 
-      // Initial icon compilation
-      lucide.createIcons();
-    });
+      tabletStep++;
+      updateTabletWizard();
+    };
+
+    // Initial render setup
+    lucide.createIcons();
   </script>
 </body>
 </html>
