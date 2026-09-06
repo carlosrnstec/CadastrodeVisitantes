@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisitaADBelemVitapolis — Painel Pastoral</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+  <!-- Google Fonts Inter / DM Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --bg: #f7f8fb; 
+      --surface: #fff; 
+      --surface2: #f1f4f8; 
+      --ink: #172033; 
+      --muted: #697386; 
+      --line: #e6eaf0; 
+      --brand: #5364e8; 
+      --success: #178052; 
+      --warn: #ad6d10; 
+      --danger: #bf3c49; 
+    }
+    .dark { 
+      --bg: #10131a; 
+      --surface: #191e28; 
+      --surface2: #222936; 
+      --ink: #f5f7fb; 
+      --muted: #aab3c2; 
+      --line: #303949; 
+      --brand: #9aa4ff; 
+      --success: #4ed49b; 
+      --warn: #f4b95d; 
+      --danger: #fb7d89; 
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 100%; font-family: "DM Sans", sans-serif; background: var(--bg); color: var(--ink); transition: background-color 0.25s, color 0.25s; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .app-shell { min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
+    .surface { background: var(--surface); border-color: var(--line); }
+    .muted { color: var(--muted); }
+    .pill { background: var(--surface2); border-color: var(--line); }
+    .focus-ring:focus-visible { outline: 3px solid rgba(83,100,232,.42); outline-offset: 2px; }
+    .nav-item { color: var(--muted); }
+    .nav-item:hover, .nav-item.active { background: rgba(83,100,232,.11); color: var(--brand); }
+    .metric { box-shadow: 0 4px 18px rgba(28,37,55,.045); }
+    .dark .metric { box-shadow: none; }
+    .status-Novo { background: #e8ebff; color: #4657cf; }
+    .status-Em-contato { background: #fff4df; color: #9a6011; }
+    .status-Voltou { background: #def8ed; color: #14744b; }
+    .status-Membro { background: #e8edf4; color: #536071; }
+    .dark .status-Novo { background: #2a315d; color: #b5bdff; }
+    .dark .status-Em-contato { background: #543d1b; color: #ffd88a; }
+    .dark .status-Voltou { background: #143d30; color: #92efc1; }
+    .dark .status-Membro { background: #303a49; color: #ccd4df; }
+    .fade-in { animation: fade 0.32s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .toast { animation: toast 0.25s ease both; }
+    @keyframes toast { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .tablet-step { display: none; }
+    .tablet-step.visible { display: block; animation: fade 0.3s ease both; }
+    .tablet-bg { background: radial-gradient(circle at top right,#e3e6ff 0,transparent 32%), var(--bg); }
+    .dark .tablet-bg { background: radial-gradient(circle at top right,#252a61 0,transparent 32%), var(--bg); }
+    .progress-line, .bar { background: var(--brand); }
+    .bar { border-radius: 8px 8px 2px 2px; min-height: 8px; }
+    @media (min-width: 768px) { .mobile-cards { display: none; } .visitor-table { display: table; } }
+    @media (max-width: 767px) { .visitor-table { display: none; } .desktop-nav { display: none; } .detail-panel { width: 100% !important; } }
+  </style>
+</head>
+<body data-template-id="__page-root">
+  <div id="loginView" class="app-shell w-full flex items-center justify-center p-5">
+    <main class="surface w-full max-w-md rounded-3xl border p-7 sm:p-9 shadow-sm fade-in" aria-labelledby="login-title">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-7" style="background:#e8ebff;color:#5364e8">
+        <i data-lucide="heart-handshake"></i>
+      </div>
+      <h1 id="login-title" class="font-bold tracking-tight text-3xl">Acompanhe cada visita com cuidado.</h1>
+      <p class="muted mt-3 leading-relaxed text-base">Entre na demonstração do painel pastoral da AD Belém Vitápolis.</p>
+      <form id="loginForm" class="mt-7" novalidate>
+        <div>
+          <label for="loginEmail" class="block text-sm font-semibold mb-2">E-mail</label>
+          <input id="loginEmail" type="email" autocomplete="username" required class="focus-ring surface border rounded-xl w-full px-4 py-3" placeholder="pastor@visitaadbelemvitapolis.com">
+          <p id="loginEmailError" class="hidden mt-2 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
+        </div>
+        <div class="mt-4">
+          <label for="loginPassword" class="block text-sm font-semibold mb-2">Senha</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required class="focus-ring surface border rounded-xl w-full px-4 py-3" placeholder="123456">
+          <p id="loginPasswordError" class="hidden mt-2 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
+        </div>
+        <p id="loginError" class="hidden mt-4 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
+        <button id="demoLogin" type="submit" class="focus-ring w-full rounded-xl py-3.5 mt-6 font-semibold text-white hover:opacity-90 min-h-12 bg-indigo-600 transition">Entrar como líder</button>
+      </form>
+      <div class="mt-6 rounded-xl p-4 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <p class="text-sm font-semibold">Ambiente demonstrativo</p>
+        <p class="muted text-sm mt-1">E-mail: pastor@visitaadbelemvitapolis.com · Senha: 123456</p>
+      </div>
+    </main>
+  </div>
+
+  <div id="appView" class="app-shell w-full hidden">
+    <header class="surface border-b sticky top-0 z-20">
+      <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:#e8ebff;color:#5364e8">
+            <i data-lucide="church" width="18"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="font-bold truncate text-base">AD Belém Vitápolis</p>
+            <p id="leaderGreeting" class="muted text-xs">Olá, Líder · Domingo, 06 de setembro</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button id="themeButton" type="button" class="focus-ring pill border rounded-xl h-10 w-10 flex items-center justify-center" aria-label="Alternar tema">
+            <i data-lucide="moon" width="18"></i>
+          </button>
+          <button id="tabletButton" type="button" class="focus-ring hidden sm:flex rounded-xl px-4 h-10 items-center gap-2 text-white font-semibold text-sm bg-indigo-600 hover:opacity-90 transition">
+            <i data-lucide="tablet" width="17"></i>
+            <span>Modo Tablet</span>
+          </button>
+          <button id="logoutButton" type="button" class="focus-ring pill border rounded-xl h-10 w-10 flex items-center justify-center" aria-label="Sair da demonstração">
+            <i data-lucide="log-out" width="17"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-5 flex gap-7">
+      <aside class="desktop-nav w-48 shrink-0">
+        <nav aria-label="Navegação principal" class="space-y-1 sticky top-24">
+          <button class="nav-item focus-ring active w-full text-left rounded-xl px-3 py-3 flex gap-3 items-center font-medium transition" data-view="dashboard">
+            <i data-lucide="layout-dashboard" width="18"></i><span>Dashboard</span>
+          </button>
+          <button class="nav-item focus-ring w-full text-left rounded-xl px-3 py-3 flex gap-3 items-center font-medium transition" data-view="visitors">
+            <i data-lucide="users" width="18"></i><span>Visitantes</span>
+          </button>
+          <button class="nav-item focus-ring w-full text-left rounded-xl px-3 py-3 flex gap-3 items-center font-medium transition" data-view="automations">
+            <i data-lucide="zap" width="18"></i><span>Automações</span>
+          </button>
+          <button class="nav-item focus-ring w-full text-left rounded-xl px-3 py-3 flex gap-3 items-center font-medium transition" data-view="settings">
+            <i data-lucide="settings" width="18"></i><span>Configurações</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="w-full min-w-0 pb-12">
+        <section id="dashboard" class="view fade-in" aria-labelledby="dashboard-heading">
+          <div class="flex flex-wrap justify-between gap-3 items-end mb-6">
+            <div>
+              <p class="text-sm font-semibold" style="color:var(--brand)">VISÃO GERAL</p>
+              <h1 id="dashboard-heading" class="font-bold tracking-tight mt-1 text-3xl">Cuidando de quem chegou.</h1>
+            </div>
+            <div class="flex gap-2">
+              <button id="dashboardAdd" type="button" class="focus-ring rounded-xl px-4 py-3 text-white font-semibold bg-indigo-600 hover:opacity-90 transition">
+                <i data-lucide="plus" width="17" class="inline mr-1"></i> Adicionar
+              </button>
+              <button id="mobileTabletButton" type="button" class="focus-ring sm:hidden rounded-xl px-4 py-3 text-white font-semibold bg-indigo-600 hover:opacity-90 transition">
+                Modo Tablet
+              </button>
+            </div>
+          </div>
+          <div id="metrics" class="grid grid-cols-2 xl:grid-cols-5 gap-3"></div>
+          <div class="grid xl:grid-cols-5 gap-5 mt-5">
+            <section class="surface xl:col-span-3 rounded-2xl border p-5" aria-labelledby="trend-heading">
+              <div>
+                <h2 id="trend-heading" class="font-bold text-xl">Ritmo de visitas</h2>
+                <p class="muted text-sm mt-1">Entradas registradas nesta semana</p>
+              </div>
+              <div id="trendChart" class="h-48 flex items-end gap-3 sm:gap-5 mt-6 border-b" style="border-color:var(--line)"></div>
+            </section>
+            <section class="surface xl:col-span-2 rounded-2xl border p-5" aria-labelledby="source-heading">
+              <h2 id="source-heading" class="font-bold text-xl">De onde vieram</h2>
+              <div id="sourceChart" class="mt-5 space-y-4"></div>
+            </section>
+          </div>
+          <div class="grid xl:grid-cols-2 gap-5 mt-5">
+            <section class="surface rounded-2xl border p-5" aria-labelledby="reengage-heading">
+              <p class="text-sm font-semibold" style="color:var(--warn)">ATENÇÃO</p>
+              <h2 id="reengage-heading" class="font-bold mt-1 text-xl">Reengajar</h2>
+              <div id="reengageList" class="mt-4 space-y-3"></div>
+            </section>
+            <section class="surface rounded-2xl border p-5" aria-labelledby="birthday-heading">
+              <p class="text-sm font-semibold" style="color:var(--brand)">CELEBRAR</p>
+              <h2 id="birthday-heading" class="font-bold mt-1 text-xl">Aniversariantes da semana</h2>
+              <div id="birthdayList" class="mt-4 space-y-3"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="visitors" class="view hidden fade-in" aria-labelledby="visitors-heading">
+          <div class="flex flex-wrap gap-3 justify-between items-end mb-6">
+            <div>
+              <p class="text-sm font-semibold" style="color:var(--brand)">RELACIONAMENTOS</p>
+              <h1 id="visitors-heading" class="font-bold tracking-tight mt-1 text-3xl">Visitantes</h1>
+            </div>
+            <div class="flex gap-3 items-center">
+              <p id="visitorCount" class="muted text-sm" aria-live="polite"></p>
+              <button id="visitorAdd" type="button" class="focus-ring rounded-xl px-4 py-3 text-white font-semibold bg-indigo-600 hover:opacity-90 transition">
+                Cadastrar visitante
+              </button>
+            </div>
+          </div>
+          <div class="surface rounded-2xl border p-3 sm:p-4">
+            <div class="grid sm:grid-cols-4 gap-3 mb-4">
+              <div class="relative">
+                <i data-lucide="search" width="17" class="absolute left-3 top-3.5 muted"></i>
+                <label class="sr-only" for="searchInput">Buscar visitante</label>
+                <input id="searchInput" class="focus-ring surface border rounded-xl w-full pl-10 pr-3 py-3 text-sm" placeholder="Buscar nome ou WhatsApp">
+              </div>
+              <div>
+                <label class="sr-only" for="dateFilter">Filtrar período</label>
+                <select id="dateFilter" class="focus-ring surface border rounded-xl w-full px-3 py-3 text-sm">
+                  <option value="all">Todas as datas</option>
+                  <option value="week">Últimos 7 dias</option>
+                  <option value="month">Este mês</option>
+                </select>
+              </div>
+              <div>
+                <label class="sr-only" for="statusFilter">Filtrar status</label>
+                <select id="statusFilter" class="focus-ring surface border rounded-xl w-full px-3 py-3 text-sm">
+                  <option value="all">Todos os status</option>
+                  <option>Novo</option>
+                  <option>Em contato</option>
+                  <option>Voltou</option>
+                  <option>Membro</option>
+                </select>
+              </div>
+              <div>
+                <label class="sr-only" for="sortSelect">Ordenar visitantes</label>
+                <select id="sortSelect" class="focus-ring surface border rounded-xl w-full px-3 py-3 text-sm">
+                  <option value="recent">Mais recentes</option>
+                  <option value="oldest">Mais antigos</option>
+                  <option value="name">Nome A–Z</option>
+                </select>
+              </div>
+            </div>
+            <div id="emptyVisitors" class="hidden py-14 text-center">
+              <i data-lucide="search-x" class="mx-auto muted w-10 h-10"></i>
+              <p class="muted mt-3">Nenhum visitante encontrado com estes filtros.</p>
+            </div>
+            <table class="visitor-table w-full text-left border-collapse">
+              <thead class="muted text-xs uppercase tracking-wider">
+                <tr>
+                  <th class="p-3">VISITANTE</th>
+                  <th class="p-3">ORIGEM</th>
+                  <th class="p-3">VISITA</th>
+                  <th class="p-3">VISITAS</th>
+                  <th class="p-3">STATUS</th>
+                  <th class="p-3">AÇÕES</th>
+                </tr>
+              </thead>
+              <tbody id="visitorRows"></tbody>
+            </table>
+            <div id="visitorCards" class="mobile-cards space-y-3"></div>
+          </div>
+        </section>
+
+        <section id="automations" class="view hidden fade-in" aria-labelledby="automations-heading">
+          <p class="text-sm font-semibold" style="color:var(--brand)">FLUXOS DE CUIDADO</p>
+          <h1 id="automations-heading" class="font-bold tracking-tight mt-1 mb-6 text-3xl">Automações</h1>
+          <div id="automationCards" class="grid md:grid-cols-3 gap-4"></div>
+          <div class="surface rounded-2xl border p-5 mt-5 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="font-bold text-xl">Teste os fluxos em segurança</h2>
+              <p class="muted text-sm mt-1">A demonstração prepara resultados locais sem conectar integrações reais.</p>
+            </div>
+            <button id="runAutomation" type="button" class="focus-ring rounded-xl px-5 py-3 text-white font-semibold bg-indigo-600 hover:opacity-90 transition">
+              Executar demonstração
+            </button>
+          </div>
+        </section>
+
+        <section id="settings" class="view hidden fade-in" aria-labelledby="settings-heading">
+          <p class="text-sm font-semibold" style="color:var(--brand)">PREFERÊNCIAS</p>
+          <h1 id="settings-heading" class="font-bold tracking-tight mt-1 text-3xl">Configurações</h1>
+          <div class="surface rounded-2xl border p-6 mt-6 max-w-xl">
+            <h2 class="font-bold text-xl">Integrações preparadas</h2>
+            <p class="muted mt-2 leading-relaxed text-sm">Esta demonstração usa uma fonte local compartilhada. Os pontos de extensão para Supabase, n8n e Evolution API permanecem apenas como placeholders.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <aside id="detailPanel" class="detail-panel hidden fixed right-0 top-0 z-40 h-full w-[470px] surface border-l shadow-2xl overflow-y-auto" aria-label="Detalhes do visitante">
+    <div class="p-5">
+      <div class="flex justify-between gap-2">
+        <button id="closeDetail" type="button" class="focus-ring pill border rounded-xl h-10 w-10 flex items-center justify-center" aria-label="Voltar ao painel">
+          <i data-lucide="arrow-left"></i>
+        </button>
+        <button id="detailWhatsApp" type="button" class="focus-ring rounded-xl px-4 py-2.5 text-white font-semibold text-sm bg-emerald-600 hover:opacity-90 transition">
+          Chamar no WhatsApp
+        </button>
+      </div>
+      <div id="detailContent" class="mt-6"></div>
+    </div>
+  </aside>
+
+  <div id="visitorModal" class="hidden fixed inset-0 z-50 bg-black/40 p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="form-title">
+    <div class="surface w-full max-w-2xl mx-auto my-4 sm:my-10 rounded-3xl border p-5 sm:p-7 shadow-2xl">
+      <div class="flex justify-between gap-3 items-start">
+        <div>
+          <p class="text-sm font-semibold" style="color:var(--brand)">CADASTRO DA LIDERANÇA</p>
+          <h2 id="form-title" class="font-bold mt-1 text-2xl">Cadastrar visitante</h2>
+        </div>
+        <button id="closeVisitorModal" type="button" class="focus-ring pill border rounded-xl h-10 w-10 flex items-center justify-center" aria-label="Fechar formulário">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="visitorForm" class="mt-6 grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formName">Nome completo</label>
+          <input id="formName" required class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formWhatsapp">WhatsApp</label>
+          <input id="formWhatsapp" required inputmode="numeric" class="focus-ring surface border rounded-xl w-full p-3 text-sm" placeholder="(11) 99999-9999">
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formBirthday">Aniversário</label>
+          <input id="formBirthday" inputmode="numeric" placeholder="DD/MM" class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formVisitDate">Data da visita</label>
+          <input id="formVisitDate" required type="date" class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formWeekday">Dia da semana calculado</label>
+          <input id="formWeekday" readonly class="pill border rounded-xl w-full p-3 muted text-sm">
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formService">Serviço</label>
+          <select id="formService" class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+            <option value="Culto de domingo">Culto de domingo</option>
+            <option value="Quarta-feira">Quarta-feira</option>
+            <option value="Evento especial">Evento especial</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formSource">Origem</label>
+          <select id="formSource" class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+            <option>Amigo</option>
+            <option>Instagram</option>
+            <option>Google</option>
+            <option>Passando na frente</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-2" for="formStatus">Status</label>
+          <select id="formStatus" class="focus-ring surface border rounded-xl w-full p-3 text-sm">
+            <option>Novo</option>
+            <option>Em contato</option>
+            <option>Voltou</option>
+            <option>Membro</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block font-semibold text-sm mb-2" for="formPrayer">Pedido de oração</label>
+          <textarea id="formPrayer" class="focus-ring surface border rounded-xl w-full p-3 min-h-20 text-sm"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block font-semibold text-sm mb-2" for="formNotes">Notas internas</label>
+          <textarea id="formNotes" class="focus-ring surface border rounded-xl w-full p-3 min-h-20 text-sm"></textarea>
+        </div>
+        <p id="formError" class="hidden sm:col-span-2 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
+        <div class="sm:col-span-2 flex justify-end gap-3 pt-2">
+          <button id="cancelVisitorForm" type="button" class="focus-ring pill border rounded-xl px-5 py-3 font-semibold text-sm">Cancelar</button>
+          <button id="saveVisitorForm" type="submit" class="focus-ring rounded-xl px-5 py-3 text-white font-semibold text-sm bg-indigo-600 hover:opacity-90 transition">Salvar visitante</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="hidden fixed inset-0 z-[55] bg-black/45 p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+    <div class="surface w-full max-w-md rounded-3xl border p-6 shadow-2xl">
+      <div class="w-11 h-11 rounded-2xl flex items-center justify-center bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400">
+        <i data-lucide="trash-2"></i>
+      </div>
+      <h2 id="delete-title" class="font-bold mt-5 text-2xl">Excluir visitante?</h2>
+      <p class="muted mt-2 text-sm leading-relaxed">Esta ação remove o cadastro da lista local e atualiza o painel imediatamente.</p>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="cancelDelete" type="button" class="focus-ring pill border rounded-xl px-4 py-3 font-semibold text-sm">Cancelar</button>
+        <button id="confirmDelete" type="button" class="focus-ring rounded-xl px-4 py-3 text-white font-semibold text-sm bg-rose-600 hover:opacity-90 transition">Excluir visitante</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabletView" class="tablet-bg hidden fixed inset-0 z-[60] overflow-y-auto p-4 sm:p-8">
+    <div class="w-full max-w-2xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <div class="flex items-center gap-2 font-bold">
+          <i data-lucide="church" style="color:var(--brand)"></i><span>AD Belém Vitápolis</span>
+        </div>
+        <button id="exitTablet" type="button" class="focus-ring pill border rounded-xl px-4 py-2.5 text-sm font-semibold">
+          Sair do Modo Tablet
+        </button>
+      </div>
+      <main class="surface rounded-3xl border p-6 sm:p-10 shadow-sm min-h-[500px] flex flex-col justify-center" aria-live="polite">
+        <section id="tabletWelcome" class="tablet-step visible text-center">
+          <div class="w-16 h-16 mx-auto rounded-3xl flex items-center justify-center" style="background:#e8ebff;color:#5364e8">
+            <i data-lucide="heart-handshake" width="30"></i>
+          </div>
+          <h1 class="font-bold tracking-tight mt-7 text-3xl">Bem-vindo! É sua primeira vez aqui?</h1>
+          <p class="muted mt-3 text-base">Seu cadastro será salvo diretamente no painel da liderança.</p>
+          <button id="startRegistration" type="button" class="focus-ring w-full mt-8 min-h-16 rounded-2xl font-bold text-white bg-indigo-600 hover:opacity-90 transition text-lg">
+            SIM, PRIMEIRA VEZ
+          </button>
+          <button id="recurringButton" type="button" class="focus-ring muted mt-5 font-semibold underline underline-offset-4 text-sm">
+            Já estive aqui antes — registrar visita recorrente
+          </button>
+        </section>
+
+        <form id="tabletForm" class="tablet-step">
+          <div class="flex justify-between mb-3">
+            <span id="stepLabel" class="font-semibold text-sm" style="color:var(--brand)"></span>
+            <span id="stepCount" class="muted text-sm"></span>
+          </div>
+          <div class="h-2 rounded-full overflow-hidden" style="background:var(--surface2)">
+            <div id="stepProgress" class="h-full progress-line transition-all duration-300"></div>
+          </div>
+          <div class="mt-8">
+            <div class="form-step" data-step="1">
+              <label class="block font-bold mb-3 text-xl" for="tabletName">Como podemos te chamar?</label>
+              <input id="tabletName" required class="focus-ring surface border rounded-2xl w-full p-4 text-xl">
+            </div>
+            <div class="form-step hidden" data-step="2">
+              <label class="block font-bold mb-3 text-xl" for="tabletWhatsapp">Qual é o seu WhatsApp?</label>
+              <input id="tabletWhatsapp" required inputmode="numeric" class="focus-ring surface border rounded-2xl w-full p-4 text-xl" placeholder="(11) 99999-9999">
+            </div>
+            <div class="form-step hidden" data-step="3">
+              <label class="block font-bold mb-3 text-xl" for="tabletDate">Em que dia você nos visitou?</label>
+              <input id="tabletDate" required type="date" class="focus-ring surface border rounded-2xl w-full p-4 text-xl">
+              <p id="tabletWeekday" class="muted mt-3 text-sm"></p>
+            </div>
+            <div class="form-step hidden" data-step="4">
+              <p class="font-bold mb-5 text-xl">Como você conheceu a gente?</p>
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" class="sourceOption focus-ring pill border rounded-2xl p-4 font-semibold text-left transition" data-source="Instagram">Instagram</button>
+                <button type="button" class="sourceOption focus-ring pill border rounded-2xl p-4 font-semibold text-left transition" data-source="Amigo">Amigo</button>
+                <button type="button" class="sourceOption focus-ring pill border rounded-2xl p-4 font-semibold text-left transition" data-source="Google">Google</button>
+                <button type="button" class="sourceOption focus-ring pill border rounded-2xl p-4 font-semibold text-left transition" data-source="Passando na frente">Passando na frente</button>
+              </div>
+            </div>
+            <div class="form-step hidden" data-step="5">
+              <label class="block font-bold mb-3 text-xl" for="tabletPrayer">Podemos orar por você?</label>
+              <textarea id="tabletPrayer" class="focus-ring surface border rounded-2xl w-full p-4 min-h-32 text-lg" placeholder="Escreva seu pedido de oração (opcional)..."></textarea>
+            </div>
+          </div>
+          <p id="tabletError" class="hidden mt-4 text-sm font-semibold" style="color:var(--danger)" role="alert"></p>
+          <div class="flex gap-3 mt-8">
+            <button id="stepBack" type="button" class="focus-ring pill border rounded-2xl px-5 min-h-14 font-semibold hidden text-base">Voltar</button>
+            <button id="stepNext" type="button" class="focus-ring rounded-2xl min-h-14 flex-1 text-white font-bold bg-indigo-600 hover:opacity-90 transition text-lg">Continuar</button>
+          </div>
+        </form>
+
+        <section id="tabletThanks" class="tablet-step text-center">
+          <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+            <i data-lucide="check" width="32"></i>
+          </div>
+          <h1 class="font-bold mt-6 text-3xl">Obrigado!</h1>
+          <p class="muted text-lg mt-3">Alguém da nossa equipe vai te chamar.</p>
+          <p class="text-sm mt-4 font-semibold text-emerald-600 dark:text-emerald-400">Seu cadastro já aparece no painel administrativo.</p>
+          <button id="restartRegistration" type="button" class="focus-ring mt-7 rounded-2xl px-6 min-h-14 font-bold text-white bg-indigo-600 hover:opacity-90 transition">
+            Iniciar novo cadastro
+          </button>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toastBox" class="fixed z-[70] bottom-5 right-5 left-5 sm:left-auto sm:w-96" aria-live="polite"></div>
+
+  <script>
+    /**
+     * Application constants & core reactive state store.
+     */
+    const TODAY = "2026-09-06";
+    const CHURCH_NAME = "AD Belém Vitápolis";
+
+    let visitors = [
+      { id: "v1", name: "Mariana Souza", whatsapp: "11987654321", birthday: "08/09", visit_date: "2026-08-30", weekday: "domingo", service: "Culto de domingo", source: "Amigo", prayer_request: "Oração pela família.", status: "Voltou", notes: "Recebeu contato caloroso.", visits_count: 2 },
+      { id: "v2", name: "Lucas Almeida", whatsapp: "11988776655", birthday: "10/09", visit_date: "2026-09-06", weekday: "domingo", service: "Culto de domingo", source: "Instagram", prayer_request: "", status: "Novo", notes: "", visits_count: 1 },
+      { id: "v3", name: "Carla Mendes", whatsapp: "11995554433", birthday: "07/09", visit_date: "2026-08-23", weekday: "domingo", service: "Quarta-feira", source: "Amigo", prayer_request: "Saúde da mãe.", status: "Em contato", notes: "Prefere mensagem no período da tarde.", visits_count: 3 },
+      { id: "v4", name: "João Pedro Lima", whatsapp: "11994443322", birthday: "", visit_date: "2026-09-03", weekday: "quarta-feira", service: "Quarta-feira", source: "Google", prayer_request: "", status: "Novo", notes: "", visits_count: 1 },
+      { id: "v5", name: "Aline Ferreira", whatsapp: "11993332211", birthday: "12/09", visit_date: "2026-08-23", weekday: "domingo", service: "Quarta-feira", source: "Passando na frente", prayer_request: "Emprego.", status: "Em contato", notes: "", visits_count: 2 }
+    ];
+
+    const automations = [
+      { title: "Reengajamento em 7 dias", description: "Cria alertas para visitantes sem retorno.", tag: "Dashboard", enabled: true },
+      { title: "Mensagem após 24 horas", description: "WhatsApp de boas-vindas após a visita.", tag: "Evolution API — placeholder", enabled: true },
+      { title: "Relatório semanal", description: "Resumo pastoral de visitantes e retornos.", tag: "n8n — placeholder", enabled: false }
+    ];
+
+    let selectedId = null;
+    let deletingId = null;
+    let tabletStep = 1;
+    let tabletSource = "";
+    let isDarkMode = false;
+
+    /**
+     * Utility Helper Functions
+     */
+    const escapeHtml = value => String(value || "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char]));
+    const getWeekday = dateStr => new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", { weekday: "long" });
+    const formatDate = dateStr => new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).replace(".", "");
+    const daysAgo = dateStr => Math.round((new Date(TODAY + "T12:00:00") - new Date(dateStr + "T12:00:00")) / 86400000);
+    const formatPhone = value => {
+      const s = String(value || "").replace(/\D/g, "");
+      return s.length >= 10 ? `(${s.slice(0, 2)}) ${s.slice(2, 7)}-${s.slice(7, 11)}` : s;
+    };
+    const getStatusClass = status => "status-" + status.replace(/\s+/g, "-");
+    const getVisitorById = id => visitors.find(visitor => visitor.id === id);
+
+    /**
+     * Non-blocking Toast Notification Controller
+     */
+    function showToast(message, type = "success") {
+      const box = document.getElementById("toastBox");
+      box.innerHTML = `
+        <div class="toast surface border rounded-2xl px-4 py-4 shadow-lg flex gap-3 items-center">
+          <i data-lucide="${type === "error" ? "circle-alert" : "circle-check"}" style="color:${type === "error" ? "var(--danger)" : "var(--success)"}"></i>
+          <p class="text-sm font-semibold">${escapeHtml(message)}</p>
+        </div>`;
+      lucide.createIcons();
+      setTimeout(() => { box.innerHTML = ""; }, 3200);
+    }
+
+    /**
+     * Render Dashboard Analytics, Metrics & Charts
+     */
+    function renderDashboard() {
+      const todayCount = visitors.filter(v => v.visit_date === TODAY).length;
+      const weekCount = visitors.filter(v => daysAgo(v.visit_date) >= 0 && daysAgo(v.visit_date) <= 6).length;
+      const monthCount = visitors.filter(v => v.visit_date.slice(0, 7) === TODAY.slice(0, 7)).length;
+      const returnRate = visitors.length ? Math.round(visitors.filter(v => v.visits_count >= 2).length / visitors.length * 100) : 0;
+      const birthdays = visitors.filter(v => ["07/09", "08/09", "09/09", "10/09", "11/09", "12/09"].includes(v.birthday));
+
+      const metrics = [
+        ["Hoje", todayCount, "visitas registradas", "users"],
+        ["Esta semana", weekCount, "últimos 7 dias", "calendar-days"],
+        ["Este mês", monthCount, "setembro de 2026", "calendar"],
+        ["Taxa de retorno", returnRate + "%", "duas visitas ou mais", "repeat-2"],
+        ["Aniversariantes", birthdays.length, "nos próximos 7 dias", "cake-slice"]
+      ];
+
+      document.getElementById("metrics").innerHTML = metrics.map(m => `
+        <article class="metric surface border rounded-2xl p-4">
+          <i data-lucide="${m[3]}" width="18" style="color:var(--brand)"></i>
+          <p class="text-2xl font-bold mt-3">${m[1]}</p>
+          <p class="text-sm font-semibold mt-1">${m[0]}</p>
+          <p class="muted text-xs mt-2">${m[2]}</p>
+        </article>`).join("");
+
+      document.getElementById("trendChart").innerHTML = [32, 44, 51, 64, 42, 78, Math.max(25, todayCount * 25)].map((height, index) => `
+        <div class="flex-1 flex flex-col justify-end items-center h-full">
+          <div class="bar w-full max-w-8" style="height:${height}%"></div>
+          <span class="muted text-[10px] mt-2">${["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"][index]}</span>
+        </div>`).join("");
+
+      const sources = ["Amigo", "Instagram", "Google", "Passando na frente"];
+      const totalSources = visitors.length || 1;
+      document.getElementById("sourceChart").innerHTML = sources.map(source => {
+        const count = visitors.filter(v => v.source === source).length;
+        const percent = Math.round(count / totalSources * 100);
+        return `
+          <div>
+            <div class="flex justify-between text-sm">
+              <span>${source}</span>
+              <span class="font-semibold">${percent}%</span>
+            </div>
+            <div class="h-2 rounded-full mt-2 overflow-hidden" style="background:var(--surface2)">
+              <div class="h-full rounded-full transition-all duration-500" style="background:var(--brand);width:${percent}%"></div>
+            </div>
+          </div>`;
+      }).join("");
+
+      const lateVisitors = visitors.filter(v => daysAgo(v.visit_date) >= 7 && v.status !== "Membro").slice(0, 3);
+      document.getElementById("reengageList").innerHTML = lateVisitors.length ? lateVisitors.map(v => renderPersonRow(v, `${daysAgo(v.visit_date)} dias sem voltar`)).join("") : `<p class="muted text-sm py-4">Nenhum visitante precisa de reengajamento.</p>`;
+      document.getElementById("birthdayList").innerHTML = birthdays.length ? birthdays.map(v => renderPersonRow(v, `${v.birthday} · aniversário`)).join("") : `<p class="muted text-sm py-4">Sem aniversários nesta semana.</p>`;
+      
+      lucide.createIcons();
+    }
+
+    function renderPersonRow(v, subtitle) {
+      return `
+        <div class="flex justify-between gap-3 items-center">
+          <button type="button" class="viewVisitor focus-ring flex gap-3 items-center text-left" data-id="${v.id}">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background:var(--surface2);color:var(--brand)">
+              ${escapeHtml(v.name.split(" ").map(x => x[0]).slice(0, 2).join(""))}
+            </div>
+            <div>
+              <p class="text-sm font-semibold">${escapeHtml(v.name)}</p>
+              <p class="muted text-xs">${subtitle}</p>
+            </div>
+          </button>
+          <button type="button" class="contactButton focus-ring rounded-lg px-3 py-2 text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300" data-id="${v.id}">WhatsApp</button>
+        </div>`;
+    }
+
+    /**
+     * Filter & Sort Visitors List
+     */
+    function getFilteredVisitors() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const dateFilter = document.getElementById("dateFilter").value;
+      const statusFilter = document.getElementById("statusFilter").value;
+      const sortSelect = document.getElementById("sortSelect").value;
+
+      let result = visitors.filter(v => {
+        const matchesQuery = !query || v.name.toLowerCase().includes(query) || v.whatsapp.includes(query);
+        const matchesStatus = statusFilter === "all" || v.status === statusFilter;
+        let matchesDate = true;
+        if (dateFilter === "week") {
+          matchesDate = daysAgo(v.visit_date) >= 0 && daysAgo(v.visit_date) <= 6;
+        } else if (dateFilter === "month") {
+          matchesDate = v.visit_date.slice(0, 7) === TODAY.slice(0, 7);
+        }
+        return matchesQuery && matchesStatus && matchesDate;
+      });
+
+      return result.sort((a, b) => {
+        if (sortSelect === "name") return a.name.localeCompare(b.name, "pt-BR");
+        if (sortSelect === "oldest") return a.visit_date.localeCompare(b.visit_date);
+        return b.visit_date.localeCompare(a.visit_date);
+      });
+    }
+
+    function renderActionButtons(visitor) {
+      return `
+        <div class="flex gap-2 flex-wrap">
+          <button type="button" class="viewVisitor focus-ring rounded-lg px-2.5 py-2 text-xs font-bold" style="color:var(--brand)" data-id="${visitor.id}" aria-label="Abrir detalhes de ${escapeHtml(visitor.name)}">
+            <i data-lucide="eye" width="16"></i>
+            <span class="sr-only">Ver detalhes</span>
+          </button>
+          <button type="button" class="editVisitor focus-ring pill border rounded-lg px-2.5 py-2 text-xs font-bold" data-id="${visitor.id}">
+            <i data-lucide="pencil" width="16" class="inline"></i> Editar
+          </button>
+          <button type="button" class="deleteVisitor focus-ring rounded-lg px-2.5 py-2 text-xs font-bold bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400" data-id="${visitor.id}">
+            <i data-lucide="trash-2" width="16" class="inline"></i> Excluir
+          </button>
+        </div>`;
+    }
+
+    function renderVisitors() {
+      const list = getFilteredVisitors();
+      document.getElementById("visitorCount").textContent = `${list.length} de ${visitors.length} visitantes`;
+      document.getElementById("emptyVisitors").classList.toggle("hidden", !!list.length);
+
+      document.getElementById("visitorRows").innerHTML = list.map(v => `
+        <tr class="border-t hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition" style="border-color:var(--line)">
+          <td class="p-3">
+            <p class="font-semibold text-sm">${escapeHtml(v.name)}</p>
+            <p class="muted text-xs">${formatPhone(v.whatsapp)}</p>
+          </td>
+          <td class="p-3 text-sm">${escapeHtml(v.source)}</td>
+          <td class="p-3 text-sm">${formatDate(v.visit_date)}<span class="block muted text-xs">${v.weekday}</span></td>
+          <td class="p-3 text-sm font-medium">${v.visits_count}x</td>
+          <td class="p-3"><span class="${getStatusClass(v.status)} rounded-full px-2.5 py-1 text-xs font-bold">${v.status}</span></td>
+          <td class="p-3">${renderActionButtons(v)}</td>
+        </tr>`).join("");
+
+      document.getElementById("visitorCards").innerHTML = list.map(v => `
+        <article class="surface border rounded-2xl p-4">
+          <div class="flex justify-between gap-3">
+            <button type="button" class="viewVisitor text-left focus-ring" data-id="${v.id}">
+              <p class="font-bold text-base">${escapeHtml(v.name)}</p>
+              <p class="muted text-sm mt-1">${formatPhone(v.whatsapp)} · ${escapeHtml(v.source)}</p>
+            </button>
+            <span class="${getStatusClass(v.status)} rounded-full px-2.5 py-1 text-xs font-bold h-fit">${v.status}</span>
+          </div>
+          <p class="muted text-xs mt-4">${formatDate(v.visit_date)} · ${v.weekday} · ${v.visits_count} visita(s)</p>
+          <div class="mt-4">${renderActionButtons(v)}</div>
+        </article>`).join("");
+
+      lucide.createIcons();
+    }
+
+    function renderAutomations() {
+      document.getElementById("automationCards").innerHTML = automations.map((automation, index) => `
+        <article class="surface border rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between gap-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#e8ebff;color:#5364e8">
+                <i data-lucide="zap" width="19"></i>
+              </div>
+              <button type="button" class="automationToggle focus-ring w-11 h-6 rounded-full p-1 transition" data-index="${index}" style="background:${automation.enabled ? "var(--brand)" : "var(--line)"}" aria-label="Alternar ${escapeHtml(automation.title)}" aria-pressed="${automation.enabled}">
+                <span class="block w-4 h-4 rounded-full bg-white transition-all ${automation.enabled ? "ml-5" : "ml-0"}"></span>
+              </button>
+            </div>
+            <h2 class="font-bold mt-5 text-lg">${escapeHtml(automation.title)}</h2>
+            <p class="muted text-sm leading-relaxed mt-2">${escapeHtml(automation.description)}</p>
+          </div>
+          <span class="inline-block mt-5 rounded-full px-2.5 py-1 text-xs font-semibold w-fit" style="background:var(--surface2);color:var(--muted)">${escapeHtml(automation.tag)}</span>
+        </article>`).join("");
+      lucide.createIcons();
+    }
+
+    function renderAll() {
+      renderDashboard();
+      renderVisitors();
+      renderAutomations();
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll(".view").forEach(el => el.classList.add("hidden"));
+      document.getElementById(viewName).classList.remove("hidden");
+      document.querySelectorAll("[data-view]").forEach(el => el.classList.toggle("active", el.dataset.view === viewName));
+    }
+
+    /**
+     * Modal & Detail Panel Controllers
+     */
+    function openVisitorForm(id = null) {
+      selectedId = id;
+      const form = document.getElementById("visitorForm");
+      form.reset();
+      document.getElementById("formError").classList.add("hidden");
+
+      const visitor = id ? getVisitorById(id) : null;
+      document.getElementById("form-title").textContent = visitor ? "Editar visitante" : "Cadastrar visitante";
+
+      if (visitor) {
+        document.getElementById("formName").value = visitor.name;
+        document.getElementById("formWhatsapp").value = formatPhone(visitor.whatsapp);
+        document.getElementById("formBirthday").value = visitor.birthday;
+        document.getElementById("formVisitDate").value = visitor.visit_date;
+        document.getElementById("formWeekday").value = visitor.weekday;
+        document.getElementById("formService").value = visitor.service;
+        document.getElementById("formSource").value = visitor.source;
+        document.getElementById("formStatus").value = visitor.status;
+        document.getElementById("formPrayer").value = visitor.prayer_request;
+        document.getElementById("formNotes").value = visitor.notes;
+      } else {
+        document.getElementById("formVisitDate").value = TODAY;
+        updateFormWeekday();
+      }
+
+      document.getElementById("visitorModal").classList.remove("hidden");
+      setTimeout(() => document.getElementById("formName").focus(), 50);
+    }
+
+    function closeVisitorForm() {
+      document.getElementById("visitorModal").classList.add("hidden");
+      selectedId = null;
+    }
+
+    function updateFormWeekday() {
+      const dateVal = document.getElementById("formVisitDate").value;
+      document.getElementById("formWeekday").value = dateVal ? getWeekday(dateVal) : "";
+    }
+
+    function showVisitorDetail(id) {
+      selectedId = id;
+      renderDetailContent();
+      document.getElementById("detailPanel").classList.remove("hidden");
+    }
+
+    function renderDetailContent() {
+      const v = getVisitorById(selectedId);
+      if (!v) {
+        document.getElementById("detailPanel").classList.add("hidden");
+        return;
+      }
+
+      document.getElementById("detailContent").innerHTML = `
+        <div class="flex gap-4 items-center">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold shrink-0" style="background:#e8ebff;color:#5364e8">
+            ${escapeHtml(v.name.split(" ").map(x => x[0]).slice(0, 2).join(""))}
+          </div>
+          <div class="min-w-0">
+            <h2 class="text-2xl font-bold truncate">${escapeHtml(v.name)}</h2>
+            <p class="muted mt-1 text-sm">${formatPhone(v.whatsapp)}</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mt-7">
+          <div class="pill border rounded-xl p-3">
+            <p class="muted text-xs font-semibold">VISITAS</p>
+            <p class="font-bold mt-1 text-lg">${v.visits_count}</p>
+          </div>
+          <div class="pill border rounded-xl p-3">
+            <p class="muted text-xs font-semibold">ÚLTIMA VISITA</p>
+            <p class="font-bold mt-1 text-sm">${formatDate(v.visit_date)}</p>
+            <p class="muted text-xs">${v.weekday}</p>
+          </div>
+        </div>
+
+        <section class="mt-7">
+          <h3 class="font-bold text-base">Status</h3>
+          <label class="sr-only" for="detailStatus">Status do visitante</label>
+          <select id="detailStatus" class="focus-ring surface border rounded-xl w-full mt-3 p-3 text-sm">
+            ${["Novo", "Em contato", "Voltou", "Membro"].map(status => `<option ${v.status === status ? "selected" : ""}>${status}</option>`).join("")}
+          </select>
+        </section>
+
+        <section class="mt-7">
+          <h3 class="font-bold text-base">Dados da visita</h3>
+          <div class="pill border rounded-xl p-3 mt-3 text-sm space-y-2">
+            <p><strong>Serviço:</strong> ${escapeHtml(v.service)}</p>
+            <p><strong>Origem:</strong> ${escapeHtml(v.source)}</p>
+            <p><strong>Aniversário:</strong> ${escapeHtml(v.birthday || "Não informado")}</p>
+          </div>
+        </section>
+
+        <section class="mt-7">
+          <h3 class="font-bold text-base">Pedido de oração</h3>
+          <p class="muted text-sm mt-2 leading-relaxed">${escapeHtml(v.prayer_request || "Nenhum pedido registrado.")}</p>
+        </section>
+
+        <section class="mt-7">
+          <h3 class="font-bold text-base">Notas</h3>
+          <label class="sr-only" for="noteInput">Notas sobre visitante</label>
+          <textarea id="noteInput" class="focus-ring surface border rounded-xl p-3 w-full min-h-28 mt-3 text-sm">${escapeHtml(v.notes)}</textarea>
+          <button id="saveNote" type="button" class="focus-ring rounded-xl px-4 py-3 mt-3 font-semibold text-sm text-white bg-indigo-600 hover:opacity-90 transition w-full">Salvar nota</button>
+        </section>
+
+        <div class="grid grid-cols-2 gap-3 mt-7">
+          <button id="markContacted" type="button" class="focus-ring rounded-xl min-h-12 font-bold text-xs bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-200 transition">Marcar contatado</button>
+          <button id="addVisit" type="button" class="focus-ring rounded-xl min-h-12 font-bold text-xs text-white bg-indigo-600 hover:opacity-90 transition">Registrar retorno</button>
+        </div>
+        <button id="detailEdit" type="button" class="focus-ring pill border rounded-xl w-full min-h-12 mt-3 font-semibold text-sm">Editar cadastro</button>`;
+
+      document.getElementById("detailStatus").onchange = e => {
+        v.status = e.target.value;
+        renderAll();
+        showToast("Status atualizado com sucesso.");
+      };
+      document.getElementById("saveNote").onclick = () => {
+        v.notes = document.getElementById("noteInput").value.trim();
+        renderAll();
+        showToast("Nota salva no cadastro.");
+      };
+      document.getElementById("markContacted").onclick = () => {
+        v.status = "Em contato";
+        renderAll();
+        renderDetailContent();
+        showToast("Visitante marcado como contatado.");
+      };
+      document.getElementById("addVisit").onclick = () => {
+        v.visits_count++;
+        v.visit_date = TODAY;
+        v.weekday = getWeekday(TODAY);
+        v.status = v.status === "Novo" ? "Voltou" : v.status;
+        renderAll();
+        renderDetailContent();
+        showToast("Visita recorrente registrada.");
+      };
+      document.getElementById("detailEdit").onclick = () => openVisitorForm(v.id);
+    }
+
+    function openWhatsApp(visitor) {
+      if (!visitor) return;
+      const cleanPhone = visitor.whatsapp.replace(/\D/g, "");
+      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes com sua visita.`)}`, "_blank", "noopener,noreferrer");
+      showToast("Abrindo conversa do WhatsApp em uma nova aba.");
+    }
+
+    /**
+     * Tablet Mode Controllers
+     */
+    function showTabletStep(stepId) {
+      document.querySelectorAll(".tablet-step").forEach(el => el.classList.remove("visible"));
+      document.getElementById(stepId).classList.add("visible");
+    }
+
+    function updateTabletWizard() {
+      document.querySelectorAll(".form-step").forEach(el => el.classList.toggle("hidden", Number(el.dataset.step) !== tabletStep));
+      document.getElementById("stepLabel").textContent = ["Seu nome", "Seu WhatsApp", "Data da visita", "Como conheceu", "Pedido de oração"][tabletStep - 1];
+      document.getElementById("stepCount").textContent = `${tabletStep} de 5`;
+      document.getElementById("stepProgress").style.width = `${tabletStep * 20}%`;
+      document.getElementById("stepBack").classList.toggle("hidden", tabletStep === 1);
+      document.getElementById("tabletError").classList.add("hidden");
+    }
+
+    function resetTabletWizard() {
+      tabletStep = 1;
+      tabletSource = "";
+      document.getElementById("tabletForm").reset();
+      document.querySelectorAll(".sourceOption").forEach(el => {
+        el.style.background = "";
+        el.style.color = "";
+      });
+      showTabletStep("tabletWelcome");
+    }
+
+    function setTabletError(msg) {
+      const errEl = document.getElementById("tabletError");
+      errEl.textContent = msg;
+      errEl.classList.remove("hidden");
+    }
+
+    /**
+     * Event Listeners & Initializations
+     */
+    window.addEventListener("DOMContentLoaded", () => {
+      // Login form handler
+      document.getElementById("loginForm").onsubmit = e => {
+        e.preventDefault();
+        const emailInput = document.getElementById("loginEmail");
+        const passwordInput = document.getElementById("loginPassword");
+        const emailErr = document.getElementById("loginEmailError");
+        const passErr = document.getElementById("loginPasswordError");
+        const loginErr = document.getElementById("loginError");
+        const loginBtn = document.getElementById("demoLogin");
+
+        emailErr.classList.add("hidden");
+        passErr.classList.add("hidden");
+        loginErr.classList.add("hidden");
+
+        let isValid = true;
+        if (!emailInput.value.trim()) {
+          emailErr.textContent = "Informe seu e-mail.";
+          emailErr.classList.remove("hidden");
+          isValid = false;
+        } else if (!emailInput.validity.valid) {
+          emailErr.textContent = "Informe um e-mail válido.";
+          emailErr.classList.remove("hidden");
+          isValid = false;
+        }
+        if (!passwordInput.value) {
+          passErr.textContent = "Informe sua senha.";
+          passErr.classList.remove("hidden");
+          isValid = false;
+        }
+        if (!isValid) return;
+
+        loginBtn.disabled = true;
+        loginBtn.setAttribute("aria-busy", "true");
+
+        setTimeout(() => {
+          if (emailInput.value.trim().toLowerCase() !== "pastor@visitaadbelemvitapolis.com" || passwordInput.value !== "123456") {
+            loginErr.textContent = "Credenciais inválidas. Use os dados demonstrativos exibidos abaixo.";
+            loginErr.classList.remove("hidden");
+            showToast("Não foi possível entrar: credenciais inválidas.", "error");
+            loginBtn.disabled = false;
+            loginBtn.removeAttribute("aria-busy");
+            return;
+          }
+          document.getElementById("loginView").classList.add("hidden");
+          document.getElementById("appView").classList.remove("hidden");
+          renderAll();
+          showToast("Login realizado com sucesso. Bem-vindo ao painel.");
+          loginBtn.disabled = false;
+          loginBtn.removeAttribute("aria-busy");
+        }, 650);
+      };
+
+      document.getElementById("logoutButton").onclick = () => {
+        document.getElementById("appView").classList.add("hidden");
+        document.getElementById("loginView").classList.remove("hidden");
+        showToast("Você saiu do painel demonstrativo.");
+      };
+
+      // Navigation View Switchers
+      document.querySelectorAll("[data-view]").forEach(btn => {
+        btn.onclick = () => switchView(btn.dataset.view);
+      });
+
+      // Theme toggle
+      document.getElementById("themeButton").onclick = () => {
+        isDarkMode = !isDarkMode;
+        document.documentElement.classList.toggle("dark", isDarkMode);
+        document.body.classList.toggle("dark", isDarkMode);
+        document.getElementById("themeButton").innerHTML = `<i data-lucide="${isDarkMode ? "sun" : "moon"}" width="18"></i>`;
+        lucide.createIcons();
+        showToast(isDarkMode ? "Modo escuro ativado." : "Modo claro ativado.");
+      };
+
+      // Modals & Forms
+      document.getElementById("dashboardAdd").onclick = () => openVisitorForm();
+      document.getElementById("visitorAdd").onclick = () => openVisitorForm();
+      document.getElementById("closeVisitorModal").onclick = closeVisitorForm;
+      document.getElementById("cancelVisitorForm").onclick = closeVisitorForm;
+      document.getElementById("formVisitDate").onchange = updateFormWeekday;
+
+      document.getElementById("formWhatsapp").oninput = e => {
+        const val = e.target.value.replace(/\D/g, "").slice(0, 11);
+        e.target.value = formatPhone(val);
+      };
+      document.getElementById("formBirthday").oninput = e => {
+        let v = e.target.value.replace(/\D/g, "").slice(0, 4);
+        if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2);
+        e.target.value = v;
+      };
+
+      document.getElementById("visitorForm").onsubmit = e => {
+        e.preventDefault();
+        const name = document.getElementById("formName").value.trim();
+        const whatsappDigits = document.getElementById("formWhatsapp").value.replace(/\D/g, "");
+        const visitDate = document.getElementById("formVisitDate").value;
+
+        if (!name || whatsappDigits.length < 10 || !visitDate) {
+          const err = document.getElementById("formError");
+          err.textContent = "Preencha nome, WhatsApp válido e data da visita.";
+          err.classList.remove("hidden");
+          return;
+        }
+
+        const record = {
+          id: selectedId || `v-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          name,
+          whatsapp: whatsappDigits,
+          birthday: document.getElementById("formBirthday").value.trim(),
+          visit_date: visitDate,
+          weekday: getWeekday(visitDate),
+          service: document.getElementById("formService").value,
+          source: document.getElementById("formSource").value,
+          prayer_request: document.getElementById("formPrayer").value.trim(),
+          status: document.getElementById("formStatus").value,
+          notes: document.getElementById("formNotes").value.trim(),
+          visits_count: 1
+        };
+
+        const saveBtn = document.getElementById("saveVisitorForm");
+        saveBtn.disabled = true;
+
+        if (selectedId) {
+          const existing = getVisitorById(selectedId);
+          record.visits_count = existing.visits_count;
+          Object.assign(existing, record);
+          showToast("Cadastro atualizado com sucesso.");
+        } else {
+          visitors.unshift(record);
+          showToast("Visitante cadastrado e exibido no painel.");
+        }
+
+        saveBtn.disabled = false;
+        closeVisitorForm();
+        renderAll();
+        if (selectedId && !document.getElementById("detailPanel").classList.contains("hidden")) {
+          renderDetailContent();
+        }
+      };
+
+      // Search & Filters
+      ["searchInput", "dateFilter", "statusFilter", "sortSelect"].forEach(id => {
+        document.getElementById(id).addEventListener(id === "searchInput" ? "input" : "change", renderVisitors);
+      });
+
+      document.getElementById("closeDetail").onclick = () => document.getElementById("detailPanel").classList.add("hidden");
+      document.getElementById("detailWhatsApp").onclick = () => openWhatsApp(getVisitorById(selectedId));
+
+      // Delete confirmation modal
+      document.getElementById("cancelDelete").onclick = () => {
+        deletingId = null;
+        document.getElementById("deleteModal").classList.add("hidden");
+      };
+      document.getElementById("confirmDelete").onclick = () => {
+        if (!deletingId) return;
+        visitors = visitors.filter(v => v.id !== deletingId);
+        if (selectedId === deletingId) {
+          selectedId = null;
+          document.getElementById("detailPanel").classList.add("hidden");
+        }
+        deletingId = null;
+        document.getElementById("deleteModal").classList.add("hidden");
+        renderAll();
+        showToast("Visitante excluído com sucesso.");
+      };
+
+      // Global event delegation for table / card buttons
+      document.addEventListener("click", event => {
+        const viewEl = event.target.closest(".viewVisitor");
+        const editEl = event.target.closest(".editVisitor");
+        const delEl = event.target.closest(".deleteVisitor");
+        const contactEl = event.target.closest(".contactButton");
+        const toggleEl = event.target.closest(".automationToggle");
+
+        if (viewEl) showVisitorDetail(viewEl.dataset.id);
+        if (editEl) openVisitorForm(editEl.dataset.id);
+        if (delEl) {
+          deletingId = delEl.dataset.id;
+          document.getElementById("deleteModal").classList.remove("hidden");
+        }
+        if (contactEl) openWhatsApp(getVisitorById(contactEl.dataset.id));
+        if (toggleEl) {
+          const auto = automations[Number(toggleEl.dataset.index)];
+          auto.enabled = !auto.enabled;
+          renderAutomations();
+          showToast(`Automação ${auto.enabled ? "ativada" : "desativada"} localmente.`);
+        }
+      });
+
+      document.getElementById("runAutomation").onclick = () => {
+        const btn = document.getElementById("runAutomation");
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.disabled = false;
+          showToast("Demonstração concluída: alertas preparados localmente.");
+        }, 700);
+      };
+
+      // Tablet Mode Controls
+      const openTabletMode = () => {
+        document.getElementById("tabletView").classList.remove("hidden");
+        showTabletStep("tabletWelcome");
+      };
+      document.getElementById("tabletButton").onclick = openTabletMode;
+      document.getElementById("mobileTabletButton").onclick = openTabletMode;
+      document.getElementById("exitTablet").onclick = () => {
+        document.getElementById("tabletView").classList.add("hidden");
+        showToast("Modo Tablet fechado. Os registros continuam no painel.");
+      };
+      document.getElementById("startRegistration").onclick = () => {
+        showTabletStep("tabletForm");
+        updateTabletWizard();
+      };
+      document.getElementById("restartRegistration").onclick = resetTabletWizard;
+
+      document.getElementById("tabletDate").onchange = () => {
+        const d = document.getElementById("tabletDate").value;
+        document.getElementById("tabletWeekday").textContent = d ? `Dia da semana: ${getWeekday(d)}` : "";
+      };
+      document.getElementById("tabletWhatsapp").oninput = e => {
+        e.target.value = formatPhone(e.target.value.replace(/\D/g, "").slice(0, 11));
+      };
+
+      document.querySelectorAll(".sourceOption").forEach(btn => {
+        btn.onclick = () => {
+          tabletSource = btn.dataset.source;
+          document.querySelectorAll(".sourceOption").forEach(el => {
+            el.style.background = "";
+            el.style.color = "";
+          });
+          btn.style.background = "var(--brand)";
+          btn.style.color = "#fff";
+        };
+      });
+
+      document.getElementById("stepBack").onclick = () => {
+        tabletStep--;
+        updateTabletWizard();
+      };
+
+      document.getElementById("stepNext").onclick = () => {
+        const name = document.getElementById("tabletName").value.trim();
+        const wa = document.getElementById("tabletWhatsapp").value.replace(/\D/g, "");
+        const visitDate = document.getElementById("tabletDate").value;
+
+        if (tabletStep === 1 && !name) return setTabletError("Por favor, informe seu nome.");
+        if (tabletStep === 2 && wa.length < 10) return setTabletError("Informe um WhatsApp válido.");
+        if (tabletStep === 3 && !visitDate) return setTabletError("A data da visita é obrigatória.");
+        if (tabletStep === 4 && !tabletSource) return setTabletError("Escolha como você nos conheceu.");
+
+        if (tabletStep < 5) {
+          tabletStep++;
+          updateTabletWizard();
+          return;
+        }
+
+        const nextBtn = document.getElementById("stepNext");
+        nextBtn.disabled = true;
+
+        visitors.unshift({
+          id: `v-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          name,
+          whatsapp: wa,
+          birthday: "",
+          visit_date: visitDate,
+          weekday: getWeekday(visitDate),
+          service: "Culto de domingo",
+          source: tabletSource,
+          prayer_request: document.getElementById("tabletPrayer").value.trim(),
+          status: "Novo",
+          notes: "Cadastro realizado no Modo Tablet.",
+          visits_count: 1
+        });
+
+        nextBtn.disabled = false;
+        renderAll();
+        showTabletStep("tabletThanks");
+        showToast("Cadastro do Tablet salvo na mesma lista do painel.");
+      };
+
+      document.getElementById("recurringButton").onclick = () => {
+        const firstVisitor = visitors[0];
+        if (!firstVisitor) {
+          showToast("Ainda não há visitante para registrar retorno.", "error");
+          return;
+        }
+        firstVisitor.visits_count++;
+        firstVisitor.visit_date = TODAY;
+        firstVisitor.weekday = getWeekday(TODAY);
+        firstVisitor.status = firstVisitor.status === "Novo" ? "Voltou" : firstVisitor.status;
+        renderAll();
+        showToast(`Retorno de ${firstVisitor.name} registrado no painel.`);
+      };
+
+      // Initial icon compilation
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
