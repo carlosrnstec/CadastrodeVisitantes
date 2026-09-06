@@ -854,7 +854,7 @@
     function openWhatsApp(visitor) {
       if (!visitor) return;
       const cleanPhone = visitor.whatsapp.replace(/\D/g, "");
-      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes​😁​ com sua visita, volte sempre, Deus continue te abençoando🙌​.`)}`, "_blank", "noopener,noreferrer");
+      window.open(`https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá, ${visitor.name}! Aqui é da ${CHURCH_NAME}. Ficamos muito felizes​😁​ com sua visita, volte sempre, Deus continue te abençoando🙌​. Atenciosamente, Pastor Vivaldino!`)}`, "_blank", "noopener,noreferrer");
       showToast("Abrindo conversa do WhatsApp em uma nova aba.");
     }
 
